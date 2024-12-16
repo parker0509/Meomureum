@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방 목록</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>방 목록</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>방 이름</th>
+        <th>주소</th>
+        <th>임대료</th>
+        <th>사진</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="room : ${rooms}">
+        <td th:text="${room.roomName}"></td>
+        <td th:text="${room.address}"></td>
+        <td th:text="${room.rentalPrice}"></td>
+        <!-- 이미지 추가 -->
+        <td><img th:src="${room.roomImageUri}" alt="Room Image"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

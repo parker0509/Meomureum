@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>방 상세 페이지</title>
+</head>
+<body>
+
+<img th:src="${room.roomImageUri}" alt="Room Image">
+<h1 th:text="${' 방 이름'+room.roomName}">방 이름</h1>
+<p th:text="${' 주소'+room.address}">주소</p>
+<p th:text="${' 방 설명'+room.description}">방 설명</p>
+<p th:text="${room.rentalPrice+'원'}">가격</p>
+<!-- 값과 함께 한글 텍스트 출력 -->
+<p th:text="${room.roomNumber + ' 방 수'}">방 수</p>
+<p th:text="${room.toilet + ' 화장실 수'}">화장실 수</p>
+<p th:text="${room.living + ' 거실 수'}">거실 수</p>
+<p th:text="${room.kitchen + ' 부엌 수'}">부엌 수</p>
+
+
+<!-- 예약 버튼 (선택 사항) -->
+<button>예약하기</button>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방 등록</title>
+</head>
+<body>
+
+<h1>방 등록</h1>
+
+<form action="/room/new" method="post">
+    <!-- 방 이름 -->
+    <label for="roomName">방 이름:</label>
+    <input type="text" id="roomName" name="roomName" required><br><br>
+
+    <!-- 방 이미지 URI -->
+    <label for="roomImageUri">방 이미지 URI:</label>
+    <input type="text" id="roomImageUri" name="roomImageUri"><br><br>
+
+    <!-- 주소 -->
+    <label for="address">주소:</label>
+    <input type="number" id="address" name="address" required><br><br>
+
+    <!-- 주소 -->
+    <!-- 방수 -->
+    <label for="roomNumber">방수:</label>
+    <input type="number" id="roomNumber" name="roomNumber" required><br><br>
+
+    <!-- 화장실 -->
+    <label for="toilet">화장실:</label>
+    <input type="number" id="toilet" name="toilet" required><br><br>
+
+    <!-- 거실 -->
+    <label for="living">거실:</label>
+    <input type="number" id="living" name="living" required><br><br>
+
+    <!-- 부엌 -->
+    <label for="kitchen">부엌:</label>
+    <input type="number" id="kitchen" name="kitchen" required><br><br>
+
+
+
+
+
+    <!-- 전용 면적 -->
+    <label for="area">전용 면적:</label>
+    <input type="number" id="area" name="area" required><br><br>
+
+    <!-- 임대료 -->
+    <label for="rentalPrice">임대료:</label>
+    <input type="number" id="rentalPrice" name="rentalPrice" required><br><br>
+
+    <!-- 위치 -->
+    <label for="location">위치:</label>
+    <input type="text" id="location" name="location" required><br><br>
+
+    <!-- 방 용도 -->
+    <label for="roomUse">방 용도:</label>
+    <textarea id="roomUse" name="roomUse" placeholder="방의 용도를 작성하세요..."></textarea><br><br>
+
+    <!-- 방 설명 -->
+    <label for="description">방 설명:</label>
+    <textarea id="description" name="description" placeholder="방의 설명을 작성하세요..."></textarea><br><br>
+
+    <!-- 애완견 동반 여부 -->
+    <label for="petAllowed">애완견 동반 여부:</label>
+    <input type="checkbox" id="petAllowed" name="petAllowed"><br><br>
+
+    <!-- 금연 여부 -->
+    <label for="smokingAllowed">금연 여부:</label>
+    <input type="checkbox" id="smokingAllowed" name="smokingAllowed"><br><br>
+
+    <!-- 등록 버튼 -->
+    <button type="submit">등록</button>
+</form>
+
+</body>
+</html>
