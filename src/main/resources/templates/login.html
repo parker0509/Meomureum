@@ -1,19 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>로그인 폼</title>
 </head>
 <body>
 <form action="/login" method="POST">
-    <label for="email">Username:</label>
-    <input type="text" id="email" name="email" required>
+    <label for="username">이메일 : </label>
+    <input type="text" id="username" name="username" required>
     <p>
     </p>
-    <label for="password">Password:</label>
+    <label for="password">비밀번호 : </label>
     <input type="password" id="password" name="password" required>
 
     <button type="submit">Login</button>
+<p>
+
+</p>
+    <div>
+        <span th:if="${param.error}" style="color:red;">아이디 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요.</span>
+    </div>
 </form>
+
+<!-- 회원가입 링크 -->
+<div>
+    <p>회원이 아니신가요? <a href="/join">회원가입</a></p>
+</div>
+
+
 </body>
 </html>

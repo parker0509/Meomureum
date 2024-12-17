@@ -2,11 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Room;
 import com.example.demo.service.RoomService;
-import com.example.demo.service.UserService;
+import com.example.demo.service.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,16 +30,20 @@ public class HomeController {
 
     @GetMapping("/")
     @Operation(summary = " 방 목록 조회 ", description = " 방 목록 모든 조회 페이지")
-    public String getHomeRooms(Model model) {
+    public String getHomeRooms(Model model, @AuthenticationPrincipal User user) {
 
+        // 로그인한 사용자 정보가 있으면
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
 
         // 모든 방 목록
         List<Room> room = roomService.getAllRooms();
         model.addAttribute("rooms", room);
 
         // 최신 방을 가장 위에 띄우고, 그 외의 방들을 내림차순으로 가져오기
-        List<Room> rooms = roomService.getLatestAndOtherRooms();
-        model.addAttribute("rooms", rooms);
+        List<Room> newrooms = roomService.getLatestAndOtherRooms();
+        model.addAttribute("newrooms", newrooms);
 
 
         return "home";

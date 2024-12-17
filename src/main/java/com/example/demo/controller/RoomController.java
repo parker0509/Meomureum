@@ -30,7 +30,7 @@ class RoomController {
     @Operation(summary = "홈 페이지에서 방 목록 조회", description = " 홈 페이지 방 목록 조회")
     public String showRoomList(Model model) {
 
-        List<Room> newroom =roomService.getAllRooms();
+        List<Room> newroom = roomService.getAllRooms();
         model.addAttribute("newroom", newroom);
 
         return "room-list";

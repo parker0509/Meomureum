@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class LoginService {
 
@@ -21,12 +23,12 @@ public class LoginService {
     }
 
 
-    public User LoginUserCheck(String email, String password, HttpSession httpSession) {
+    public Optional<User> LoginUserCheck(String email, String password, HttpSession httpSession) {
 
 
-        User user = userRepository.findByEmail(email);
+        Optional<User> user = userRepository.findByEmail(email);
 
-        if (user != null && bCryptPasswordEncoder.matches(password, user.getPassword())) {
+        if(user.isPresent() && user.get().getPassword() != null && bCryptPasswordEncoder.matches(password, user.get().getPassword())) {
 
             httpSession.setAttribute("user", user);
 

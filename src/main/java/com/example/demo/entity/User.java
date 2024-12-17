@@ -1,21 +1,59 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Entity
-public class User {
-
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Long id;
-    private String name;
-    private String phone;
+
+    @NotNull
     private String password;
+
+    @NotNull
+    private String name;
+
+    private String phone;
+
     private String email;
+
+    @Column
+    private String picture;
+
+    private String gender;
+
+    private String age;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+
+
+
+    // 사용자 정보 업데이트 메서드 추가
+    public void update(String name, String email) {
+        this.name = name;
+        this.email = email;
+        this.picture = picture != null ? picture : "N/A";
+        this.gender = gender != null ? gender : "N/A";
+        this.age = age != null ? age : "N/A";
+    }
+
+    public User() {
+    }
 
     public Long getId() {
         return id;
@@ -33,12 +71,36 @@ public class User {
         this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 
     public String getPassword() {
@@ -49,12 +111,51 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public Role getRole() {
+        return role;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // 권한을 반환, 예: ROLE_USER, ROLE_ADMIN
+        return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
+    }
+
+    // 나머지 메서드 (isAccountNonExpired, isAccountNonLocked 등) 구현은 그대로
+    @Override
+    public String getUsername() {
+        return this.name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
-
