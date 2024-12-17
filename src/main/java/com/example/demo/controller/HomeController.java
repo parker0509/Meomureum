@@ -42,8 +42,12 @@ public class HomeController {
         model.addAttribute("rooms", room);
 
         // 최신 방을 가장 위에 띄우고, 그 외의 방들을 내림차순으로 가져오기
-        List<Room> newrooms = roomService.getLatestAndOtherRooms();
+        List<Room> newrooms = roomService.getLatestRooms();
         model.addAttribute("newrooms", newrooms);
+
+        // 최신 4개 방을 제외한 나머지 방들
+        List<Room> otherRooms = roomService.getRemainingRooms(); // getRemainingRooms 메소드에서 나머지 방들을 리턴
+        model.addAttribute("otherRooms", otherRooms);
 
 
         return "home";

@@ -1,38 +1,51 @@
 /* 기본 스타일 */
-
-
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff; /* 배경색을 흰색으로 변경 */
-    color: #333;
-}
+     body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFFF; /*흰색 배경*/
+            color: #333;
+        }
 
 /* 구글 폰트 Poppins 추가 */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
 
 /* 네비게이션 바 스타일 */
 .navbar {
-    background-color: #FFFFFF; /* 흰색 */
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+}
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
 }
 
 .navbar-brand {
     font-family: 'Poppins', sans-serif; /* Poppins 글씨체 적용 */
-    font-weight: 600; /* 적당히 두껍게 */
-    font-size: 1.5rem; /* 글씨 크기 조정 */
-    color: #333; /* 더 보기 좋은 색상 */
+    font-weight: 700; /* 적당히 두껍게 */
+    font-size: 2rem; /* 글씨 크기 조정 */
+    color: #111; /* 더 보기 좋은 색상 */
 }
 
 .navbar-nav .nav-link {
     font-family: 'Poppins', sans-serif; /* Poppins 글씨체 적용 */
     color: black !important;
-    font-weight: 500;
+    font-weight: 700;
     transition: color 0.3s ease;
+
 }
 
-.navbar-nav .nav-link:hover {
-    color: #aaa !important; /* 회색 톤으로 변경 */
+/* 로고나 버튼에 마우스를 올렸을 때 색상 변경 */
+.navbar-brand:hover {
+    color: #111111; /* hover 시 오렌지색으로 변경 */
 }
 
 /* Hero Section */
@@ -102,72 +115,104 @@ body {
 }
 
 
-/* 카드 컨테이너 스타일 */
+/* 신규 방 카드 레이아웃 */
+.room-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+/* 카드 hover 효과 */
+.room-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* 카드 이미지 */
+.room-card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.room-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* 카드 본문 스타일 */
+.room-card-body {
+    padding: 15px;
+}
+
+/* 카드 제목 */
+.room-card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* 가격 스타일 */
+.room-card-price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* 주소 스타일 */
+.room-card-address {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* 카드 이미지 hover 효과 */
+.room-card-image:hover img {
+    transform: scale(1.1);
+}
+
+/* 방 목록 컨테이너 스타일 */
 .room-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
     justify-content: center;
-    margin-top: 2rem;
-    border: none;
+    margin-top: 30px;
 }
 
-.card {
-    border: none !important;  /* 카드의 기본 테두리 제거 */
-    box-shadow: none !important;  /* 그림자 제거 */
-}
-
-/* 개별 카드 스타일 */
-.room-card {
-    border: none !important; /* 테두리 제거 */
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: none; /* 그림자 제거 */
-    width: 300px;  /* 카드 너비를 고정 */
-    height: 400px;  /* 카드 높이 고정 */
-    transition: transform 0.2s ease-in-out;
-}
-
-.room-card:hover {
-    transform: scale(1.05);
-}
-
-.room-card img {
-    width: 100%;  /* 이미지를 카드 크기에 맞게 100% 설정 */
-    height: 200px;  /* 이미지의 고정된 높이 설정 */
-    object-fit: cover;  /* 이미지 비율 유지하며 잘라내기 */
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-.room-card-body {
-    padding: 1rem;
-    flex-grow: 1; /* 내용이 꽉 차도록 설정 */
-}
-
-.room-card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-}
-
-.room-card-description {
-    font-size: 0.9rem;
-    color: #555;
-}
-
-.room-card-price {
+/* 버튼 스타일 */
+.btn-show-more {
+    display: block;
+    width: 200px;
+    margin: 40px auto;
+    padding: 10px 20px;
     font-size: 1rem;
-    font-weight: bold;
-    color: #007bff;
-    margin-top: 0.5rem;
+    text-align: center;
+    background-color: #FF5722;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
+.btn-show-more:hover {
+    background-color: #e64a19;
+}
+
 textarea {
     width: 100%;   /* 부모 요소의 100% 너비로 설정 */
     height: 220px; /* 고정된 세로 크기 */
     resize: both;  /* 사용자가 크기를 조절할 수 있게 설정 */
     box-sizing: border-box; /* 패딩을 포함하여 크기를 계산 */
 }
+
 /* 모든 링크에 대해 기본 색상 설정 */
 a {
     color: inherit; /* 부모의 색상을 상속받게 하여 기본 글씨 색상을 유지 */
@@ -176,6 +221,224 @@ a {
 
 /* 마우스 오버 시 링크 색상 변경 */
 a:hover {
-    color: #0056b3; /* 마우스를 올렸을 때 색상 변경 (예: 파란색) */
-    text-decoration: underline; /* 마우스를 올렸을 때 밑줄 추가 */
+    color: #111111; /* 마우스를 올렸을 때 색상 변경 (예: 파란색) */
+    text-decoration: none; /* 마우스를 올렸을 때 밑줄 없앰 */
+}
+
+.text-center {
+    text-align: center;
+}
+
+#showMoreRooms {
+    display: inline-block; /* 버튼을 inline-block으로 설정하여 block처럼 중앙 정렬 */
+    margin: 0 auto; /* 상하 여백은 유지하면서 좌우는 자동으로 중앙 정렬 */
+}
+/* 신규 방 제목 스타일 */
+.new-rooms-title {
+    font-family: 'Montserrat', sans-serif; /* 예쁜 폰트로 변경 */
+    font-weight: 900;  /* 두껍게 */
+    font-size: 1.25rem;   /* 크기 크게 */
+    color: #111;       /* 글씨 색상 */
+    text-align: center;
+    text-transform: uppercase;  /* 대문자로 */
+    letter-spacing: 2px;        /* 글자 간격 */
+    margin-bottom: 2px;        /* 아래쪽 여백 */
+    position: relative;
+    padding: 10px 0;
+}
+
+
+/* 서브 제목 스타일 (이런 방은 어떠세요?) */
+.new-rooms-subtitle {
+    font-family: 'Poppins', sans-serif; /* 다른 예쁜 폰트 사용 */
+    font-weight: 500;
+    font-size: 1.25rem; /* 크기 조정 */
+    color: #111;
+    text-align: center;
+    margin-bottom: 40px; /* 아래쪽 여백 */
+    letter-spacing: 1px;  /* 글자 간격 */
+}
+
+/* 검색창 스타일 */
+.search-box {
+    display: flex; /* 가로로 나열 */
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center;
+    gap: 0; /* 입력창과 버튼 사이 간격 제거 */
+}
+
+/* 입력창 스타일 */
+.search-input {
+    padding: 8px 15px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-right: none;
+    border-radius: 20px 0 0 20px;
+    outline: none;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+
+/* 입력창 포커스 시 스타일 */
+.search-input:focus {
+    border-color: #FF5722;
+}
+
+
+/* 네비게이션 바 스타일 */
+.navbar {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #000;
+}
+
+/* 검색창 스타일 */
+.search-box {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 8px 15px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-right: none;
+    border-radius: 20px 0 0 20px;
+    outline: none;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+.search-btn {
+    padding: 8px 12px;
+    font-size: 1rem;
+    background-color: #f5f5f5;
+    border: 2px solid #ccc;
+    border-left: none;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+}
+.navbar-icons span {
+    margin: 0 5px;
+    font-size: 0.9rem;
+    color: #555;
+    cursor: pointer;
+}
+.navbar-icons span:hover {
+    color: #000;
+}
+
+/* 버튼에 마우스를 올렸을 때 스타일 */
+.search-btn:hover {
+    background-color: #e64a19;
+    border-color: #e64a19;
+}
+
+/* 검색 컨테이너 스타일 */
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* 제목과 검색창 세로 배치 */
+    background: linear-gradient(to bottom, #2c89b3, #5d4af4);
+    padding: 30px 20px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+/* 검색 제목 스타일 */
+.search-container h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 20px; /* 제목과 검색창 사이 여백 */
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+    .search-input {
+        width: 100%; /* 작은 화면에서는 전체 너비 사용 */
+    }
+    .search-box {
+        flex-direction: column; /* 세로로 나열 */
+    }
+    .search-btn {
+        width: 100%;
+    }
+
+}
+/* 카테고리 메뉴 */
+.category-menu {
+    display: flex; /* 메뉴 항목들을 가로로 나열하기 위해 flexbox 사용 */
+    justify-content: center; /* 메뉴 항목들을 가로로 중앙 정렬 */
+    align-items: center; /* 메뉴 항목들을 세로로 중앙 정렬 */
+    padding: 5px 10px; /* 메뉴 상하 좌우에 여백을 주어 패딩 적용 */
+    background-color: #fff; /* 배경색을 흰색으로 설정 */
+    border-bottom: 1px solid #ddd; /* 메뉴 하단에 얇은 회색 선 추가 */
+}
+
+/* 카테고리 버튼 스타일 */
+.category-btn {
+    background-color: #111; /* 버튼 배경색을 어두운 회색으로 설정 */
+    color: #fff; /* 버튼 글씨 색상은 흰색으로 설정 */
+    border: none; /* 버튼의 기본 테두리를 없앰 */
+    padding: 8px 12px; /* 버튼 내부에 여백을 추가하여 크기를 조정 */
+    font-size: 1rem; /* 글씨 크기를 1rem으로 설정 */
+    border-radius: 5px; /* 버튼의 모서리를 둥글게 처리 */
+    cursor: pointer; /* 버튼에 마우스를 올렸을 때 커서 모양을 손가락 모양으로 변경 */
+    margin-right: 20px; /* 메뉴 항목 간의 간격을 넓힘 */
+}
+
+/* 카테고리 버튼에 마우스를 올렸을 때 스타일 */
+.category-btn:hover {
+    background-color: #333; /* 마우스를 올리면 버튼 배경색을 어두운 색으로 변경 */
+}
+
+/* 메뉴 링크 스타일 */
+.menu-links a {
+    margin-right: 15px; /* 메뉴 항목들 간의 오른쪽 여백을 15px로 설정 */
+    text-decoration: none; /* 기본적으로 링크의 밑줄을 없앰 */
+    color: #555; /* 링크 글씨 색상은 회색으로 설정 */
+    font-weight: 600; /* 글씨 두께를 600으로 설정 */
+    font-size: 0.95rem; /* 글씨 크기를 0.95rem으로 설정 */
+}
+
+/* 메뉴 링크에 마우스를 올렸을 때 스타일 */
+.menu-links a:hover {
+    color: #111; /* 마우스를 올리면 링크 글씨 색상을 어두운 회색으로 변경 */
+    text-decoration: underline; /* 마우스를 올리면 링크 밑줄을 표시 */
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    /* 화면 크기가 768px 이하일 때 */
+
+    .category-menu {
+        flex-direction: column; /* 메뉴 항목들을 세로로 나열 */
+        align-items: flex-start; /* 메뉴 항목들을 왼쪽 정렬 */
+    }
+
+    .menu-links a {
+        display: block; /* 링크들을 세로로 나열하기 위해 block 요소로 설정 */
+        margin: 5px 0; /* 링크들 간의 여백을 위아래로 5px로 설정 */
+    }
 }

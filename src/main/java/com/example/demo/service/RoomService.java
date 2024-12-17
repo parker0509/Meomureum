@@ -14,6 +14,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 @Controller
 public class RoomService {
 
@@ -85,5 +88,16 @@ public class RoomService {
 
         return rooms;
     }
+
+
+    public List<Room> getLatestRooms(){
+        return roomRepository.findTop4ByOrderByIdDesc();
+    }
+
+    public List<Room> getRemainingRooms(){
+        return roomRepository.findAllByOrderByIdDesc();
+    }
+
+
 
 }
