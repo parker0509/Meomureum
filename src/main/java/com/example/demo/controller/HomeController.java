@@ -53,5 +53,10 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/map")
+    public String getkakaoMap(){
+        return "map";
+    }
+
 
 }

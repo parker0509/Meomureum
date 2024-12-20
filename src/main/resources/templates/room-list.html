@@ -39,7 +39,6 @@
     <tbody>
     <tr th:each="room : ${newroom}">
         <td th:text="${room.roomName}"></td>
-        <td th:text="${room.address}"></td>
         <td th:text="${room.rentalPrice}"></td>
         <!-- 이미지 추가 -->
         <td><img th:src="${room.roomImageUri}" alt="Room Image"></td>

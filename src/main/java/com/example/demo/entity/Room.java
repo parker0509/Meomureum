@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -14,8 +15,12 @@ public class Room {
 
     private String roomName;
     private String roomImageUri;
-    private String address;
+
+
+    @Column(nullable = false)
     private double area;  // 전용 면적 (평수 또는 m²)
+
+    @Column(nullable = false)
     private double rentalPrice;  // 임대료
     private String location;  // 위치
     private String description;
@@ -25,14 +30,35 @@ public class Room {
     private int living; // 거실 수
     private int kitchen; // 부엌 수
 
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id" , nullable = false)
+    private Address address;// Address와의 관계 설정
+
+
     // 추가된 created 필드
     private LocalDateTime created;  // 방 생성 시간을 저장
 
+    @PrePersist
+    public void prePersist() {
+        // 엔티티가 저장되기 전에 created 필드 자동으로 현재 시간으로 설정
+        this.created = LocalDateTime.now();
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     // Getter, Setter, 기타 필요한 코드들
     public LocalDateTime getCreated() {
         return created;
     }
+
+
 
     public void setCreated(LocalDateTime created) {
         this.created = created;
@@ -61,14 +87,6 @@ public class Room {
 
     public void setRoomImageUri(String roomImageUri) {
         this.roomImageUri = roomImageUri;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public double getArea() {

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Tag(name = "User API", description = "유저 관련 API")
-@RequestMapping("/join")
+@RequestMapping("/api/join")
 @Controller
 public class UserController {
 

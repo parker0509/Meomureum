@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>머무름 - 지도에 방 표시</title>
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=57c9b6595a27b8053765e34df51ea853"></script>
+    <style>
+        /* 기본 스타일 */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* 사이드바 스타일 */
+        #sidebar {
+            width: 300px;
+            overflow-y: auto;
+            background: #f9f9f9;
+            border-right: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        #search-bar {
+            margin-bottom: 10px;
+        }
+
+        #search-input {
+            width: 80%;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        .room-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .room-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .room-item:hover {
+            transform: scale(1.02);
+        }
+
+        .room-item h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .room-item p {
+            margin: 0;
+            color: #666;
+        }
+
+        /* 지도 스타일 */
+        #map {
+            flex: 1;
+            height: 100%;
+        }
+
+        /* 마커 스타일 */
+        .customoverlay {
+            background: black;
+            color: white;
+            padding: 5px;
+            border-radius: 3px;
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 사이드바 -->
+    <div id="sidebar">
+        <h2>머무름 방 리스트</h2>
+        <div id="search-bar">
+            <input type="text" id="search-input" placeholder="방 검색 (예: 가격, 설명)">
+            <button onclick="searchRooms()">검색</button>
+        </div>
+        <ul id="roomList" class="room-list"></ul>
+    </div>
+
+    <!-- 지도 -->
+    <div id="map"></div>
+</div>
+
+<script>
+    var container = document.getElementById('map');
+    var options = {
+        center: new kakao.maps.LatLng(37.511337, 127.059058), // 서울 논현동 중심 좌표
+        level: 5
+    };
+
+    var map = new kakao.maps.Map(container, options);
+
+    var rooms = [];  // 서버에서 가져올 데이터 배열
+    var overlays = []; // 오버레이 저장 배열
+    var markers = [];  // 마커 저장 배열
+
+    // 서버에서 데이터 가져오기
+    function fetchRooms() {
+        fetch("http://localhost:8080/api/room")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("서버에서 데이터를 불러오는데 실패했습니다.");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log("서버 응답 데이터:", data);
+                rooms = data.map(room => ({
+                    id: room.id,
+                    lat: parseFloat(room.x), // latitude 값 직접 사용, 숫자형으로 변환
+                    lng: parseFloat(room.y), // longitude 값 직접 사용, 숫자형으로 변환
+                    price: room.rentalPrice + "원/1주",
+                    description: room.description
+                }));
+                displayRooms(); // 데이터를 가져온 후 방 목록과 지도 업데이트
+            })
+            .catch((error) => {
+                console.error("에러 발생:", error);
+            });
+    }
+
+    var roomList = document.getElementById('roomList');
+
+    // 방 목록 초기화
+    function displayRooms(filterKeyword = "") {
+        roomList.innerHTML = ""; // 기존 목록 초기화
+
+        // 지도에 표시된 마커 및 오버레이 제거
+        markers.forEach(marker => marker.setMap(null));
+        overlays.forEach(overlay => overlay.setMap(null));
+        markers = [];
+        overlays = [];
+
+        // 필터링 및 표시
+        rooms.filter(room => {
+            return room.price.toLowerCase().includes(filterKeyword.toLowerCase()) || room.description.toLowerCase().includes(filterKeyword.toLowerCase());
+        }).forEach(function(room) {
+            // 목록에 추가
+            var listItem = document.createElement('li');
+            listItem.className = 'room-item';
+            listItem.innerHTML = `
+                <h4>${room.description}</h4>
+                <p>${room.price}</p>
+            `;
+            roomList.appendChild(listItem);
+
+            // 지도에 마커 및 오버레이 추가
+            var markerPosition = new kakao.maps.LatLng(room.lat, room.lng);
+            var marker = new kakao.maps.Marker({
+                position: markerPosition,
+                map: map
+            });
+            markers.push(marker);
+
+            var overlayContent = `<div class="customoverlay">${room.price}</div>`;
+            var overlay = new kakao.maps.CustomOverlay({
+                position: markerPosition,
+                content: overlayContent,
+                yAnchor: 1.5
+            });
+            overlays.push(overlay);
+            overlay.setMap(map);
+
+            // 방 클릭 시 해당 위치로 지도 이동
+            listItem.addEventListener('click', function() {
+                // 기존 오버레이 숨기기
+                overlays.forEach(o => o.setMap(null));
+
+                // 클릭한 방의 위도와 경도 값 가져오기
+                const lat = parseFloat(room.lat);  // 숫자로 변환
+                const lng = parseFloat(room.lng);  // 숫자로 변환
+
+                console.log("클릭된 방의 위도, 경도: ", lat, lng);  // 디버깅 콘솔 출력
+
+                if (!isNaN(lat) && !isNaN(lng)) {  // 숫자 값인지 확인
+                    // 위도와 경도로 지도 이동
+                    var markerPosition = new kakao.maps.LatLng(lat, lng);
+                    map.setCenter(markerPosition);  // 지도 중심을 이동
+                    map.setLevel(3);  // 줌 레벨 설정
+
+                    // 해당 방에 해당하는 오버레이만 표시
+                    var overlayContent = `<div class="customoverlay">${room.price}</div>`;
+                    var overlay = new kakao.maps.CustomOverlay({
+                        position: markerPosition,
+                        content: overlayContent,
+                        yAnchor: 1.5
+                    });
+                    overlay.setMap(map);  // 새로운 오버레이를 지도에 표시
+                } else {
+                    console.error("위도나 경도가 유효하지 않습니다.");
+                }
+            });
+        });
+    }
+
+    // 검색 기능
+    function searchRooms() {
+        var keyword = document.getElementById('search-input').value;
+        displayRooms(keyword);
+    }
+
+    // 서버에서 데이터 가져와서 화면에 표시
+    fetchRooms();
+</script>
+
+</body>
+</html>

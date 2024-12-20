@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("login")
+@RequestMapping("/api/login")
 public class LoginController {
 
 

@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.client.RestTemplate;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -48,10 +49,10 @@ public class SecurityConfig {
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
 
                 .formLogin(form -> form
-                        .loginPage("/login")  // 로그인 페이지 경로
+                        .loginPage("/api/login")  // 로그인 페이지 경로
                         .permitAll()           // 로그인 페이지는 누구나 접근 가능
                         .defaultSuccessUrl("/", true)  // 로그인 성공 후 리디렉션
-                        .failureUrl("/login?error=true")  // 로그인 실패 시 리디렉션  // 로그인 실패 시 리디렉션할 URL
+                        .failureUrl("/api/login?error=true")  // 로그인 실패 시 리디렉션  // 로그인 실패 시 리디렉션할 URL
                 )
 
                 .logout(logout -> logout
@@ -64,6 +65,7 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/swagger-ui/**").authenticated()
+                        .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
                         .anyRequest().permitAll())
 
 
@@ -71,9 +73,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-
-
 
 
 }

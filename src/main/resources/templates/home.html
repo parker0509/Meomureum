@@ -40,11 +40,11 @@
                 </li>
 
 
-                <li class="nav-item"><a class="nav-link" href="/admin">방 등록</a></li>
-                <li class="nav-item"><a class="nav-link" href="/room">방</a></li>
+                <li class="nav-item"><a class="nav-link" href="/api/admin">방 등록</a></li>
+                <li class="nav-item"><a class="nav-link" href="/api/room">방</a></li>
                 <!-- 로그인하지 않은 경우 로그인/회원가입 버튼 표시 -->
                 <li class="nav-item" th:if="${username == null}">
-                    <a class="nav-link" href="/login">회원가입/로그인</a>
+                    <a class="nav-link" href="/api/login">회원가입/로그인</a>
                 </li>
 
                 <!-- 로그인한 경우 로그아웃 버튼 표시 -->
@@ -66,7 +66,7 @@
         <a href="#">4주</a>
         <a href="#">1달</a>
         <a href="#">단기</a>
-        <a href="#">지도</a>
+        <a href="/api/map">지도</a>
         <a href="#">이벤트</a>
     </div>
 </div>
@@ -87,14 +87,13 @@
     <div class="row">
         <div class="col-md-3" th:each="room : ${newrooms}">
             <div class="room-card">
-                <a th:href="@{/room/{id}(id=${room.id})}">
+                <a th:href="@{/api/room/{id}(id=${room.id})}">
                     <div class="room-card-image">
                         <img th:src="@{${room.roomImageUri}}" alt="Room Image" class="img-fluid">
                     </div>
                     <div class="room-card-body">
                         <h5 class="room-card-title" th:text="${room.roomName}">방 이름</h5>
                         <p class="room-card-price" th:text="${room.rentalPrice}">가격</p>
-                        <p class="room-card-address" th:text="${room.address}">주소</p>
                     </div>
                 </a>
             </div>
@@ -112,11 +111,10 @@
     <h4>나머지 방들</h4>
     <div class="row">
         <div class="col-md-3" th:each="room : ${otherRooms}">
-            <a th:href="@{/room/{id}(id=${room.id})}" class="card mb-3">
+            <a th:href="@{/api/room/{id}(id=${room.id})}" class="card mb-3">
                 <img th:src="${room.roomImageUri}" class="room-card-img" alt="Room Image">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${room.roomName}">방 이름</h5>
-                    <p class="card-text" th:text="${room.address}">주소</p>
                     <p class="card-text" th:text="${room.rentalPrice + ' 원 / 1주'}"> / 1주</p>
                 </div>
             </a>
