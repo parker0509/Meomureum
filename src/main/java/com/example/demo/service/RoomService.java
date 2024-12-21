@@ -48,9 +48,9 @@ public class RoomService {
 
 
 
-/*
-    Room room = roomService.createRoomswithAddress(roomName, area, rentalPrice, addressQuery,description,roomImageUri,roomUse);
-    */
+    /*
+        Room room = roomService.createRoomswithAddress(roomName, area, rentalPrice, addressQuery,description,roomImageUri,roomUse);
+        */
     public Room createRoomswithAddress(String roomName,
                                        double area,
                                        double rentalPrice,
@@ -59,7 +59,7 @@ public class RoomService {
                                        String roomImageUri,
                                        String roomUse
 
-                                       ) {
+    ) {
 
 
         Address address = kakaoApiService.getCoordinatesFromAddress(addressQuery);

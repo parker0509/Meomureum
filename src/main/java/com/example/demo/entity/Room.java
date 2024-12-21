@@ -31,7 +31,7 @@ public class Room {
     private int kitchen; // 부엌 수
 
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id" , nullable = false)
     private Address address;// Address와의 관계 설정
 
