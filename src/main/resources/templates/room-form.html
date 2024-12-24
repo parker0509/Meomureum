@@ -60,6 +60,12 @@
     <!-- 방 용도 -->
     <p>
 
+        <!-- 주소 쿼리 -->
+        <label for="addressQuery">주소 쿼리:</label>
+        <input type="text" id="addressQuery" name="addressQuery" required><br><br>
+
+
+
     </p>
     <label for="roomUse">방 용도:</label>
     <textarea id="roomUse" name="roomUse" placeholder="방의 용도를 작성하세요..."></textarea><br><br>
@@ -76,10 +82,6 @@
     <label for="smokingAllowed">금연 여부:</label>
     <input type="checkbox" id="smokingAllowed" name="smokingAllowed"><br><br>
 
-
-    <!-- 주소 쿼리 -->
-    <label for="addressQuery">주소 쿼리:</label>
-    <input type="text" id="addressQuery" name="addressQuery" required><br><br>
 
 
     <!-- 등록 버튼 -->
@@ -108,9 +110,13 @@
         new daum.Postcode({
             oncomplete: function(data) {
                 var addr = data.address;
+                var fulladdr = data.address;
 
                 document.getElementById("sample5_address").value = addr;
                 document.getElementById("address").value = addr;
+                document.getElementById('addressQuery').value = fulladdr;
+
+
 
                 geocoder.addressSearch(data.address, function(results, status) {
                     if (status === daum.maps.services.Status.OK) {

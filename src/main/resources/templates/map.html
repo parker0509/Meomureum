@@ -127,8 +127,8 @@
                 console.log("서버 응답 데이터:", data);
                 rooms = data.map(room => ({
                     id: room.id,
-                    lat: parseFloat(room.x), // latitude 값 직접 사용, 숫자형으로 변환
-                    lng: parseFloat(room.y), // longitude 값 직접 사용, 숫자형으로 변환
+                    lat: parseFloat(room.address.y), // latitude 값 직접 사용, 숫자형으로 변환
+                    lng: parseFloat(room.address.x), // longitude 값 직접 사용, 숫자형으로 변환
                     price: room.rentalPrice + "원/1주",
                     description: room.description
                 }));

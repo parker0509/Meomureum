@@ -94,5 +94,9 @@ class RoomController {
         return ResponseEntity.ok(room);
     }
 
+    @GetMapping("/map")
+    public String getkakaoMap(){
+        return "map";
+    }
 
 }
