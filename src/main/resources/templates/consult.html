@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자 상담</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .radio-group, .checkbox-group {
+            margin-bottom: 15px;
+        }
+        .radio-group label, .checkbox-group label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 체크박스 스타일 */
+        .checkbox-group {
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group label {
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+
+        .checkbox-group a {
+            margin-left: 5px;
+        }
+
+        /* 휴대폰 번호 입력 부분 */
+        .phone-input-container {
+            margin-bottom: 20px;
+        }
+
+        .phone-input-container label[for="phone"] {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .phone-input-container input[type="tel"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>문자 상담</h1>
+<form id="consultForm" action="/submit-consult" method="POST">
+
+    <!-- 휴대폰번호 -->
+    <div class="phone-input-container">
+        <label for="phone">답장 받을 휴대폰번호 입력 (필수)</label>
+        <input type="tel" id="phone" name="phone" placeholder="휴대폰 번호를 입력하세요" required>
+    </div>
+
+    <!-- 성별 -->
+    <label>성별</label>
+    <div class="radio-group">
+        <label><input type="radio" name="gender" value="none" checked> 선택안함</label>
+        <label><input type="radio" name="gender" value="male"> 남성</label>
+        <label><input type="radio" name="gender" value="female"> 여성</label>
+    </div>
+
+    <!-- 입주 예정일 -->
+    <label for="move_in">입주 예정일</label>
+    <select id="move_in" name="move_in">
+        <option value="none">선택안함</option>
+        <option value="immediate">즉시</option>
+        <option value="within_week">일주일 이내</option>
+        <option value="within_month">한달 이내</option>
+        <option value="after_month">한달 이후</option>
+    </select>
+
+    <!-- 문의 내용 -->
+    <label for="message">문의 내용 (0/80)</label>
+    <textarea id="message" name="message" rows="3" maxlength="80" placeholder="문의 내용을 입력하세요">빈 방 문의드립니다.</textarea>
+
+    <!-- 정보 기억하기 -->
+    <div class="checkbox-group">
+        <label><input type="checkbox" name="remember" value="yes">입력한 정보 기억하기</label>
+    </div>
+
+    <!-- 약관 동의 -->
+    <div class="checkbox-group">
+        <label><input type="checkbox" name="agree_14" required> [필수] 만 14세 이상입니다.</label><br>
+        <label><input type="checkbox" name="agree_privacy" required> [필수] 개인정보 수집 및 이용 동의 <a href="#">자세히</a></label><br>
+        <label><input type="checkbox" name="agree_third_party" required> [필수] 개인정보 제3자 제공 동의 <a href="#">자세히</a></label>
+    </div>
+
+    <!-- 전송하기 버튼 -->
+    <button type="submit">전송하기</button>
+
+</form>
+
+<script>
+    // 폼 제출 시 팝업 띄우기
+    document.getElementById('consultForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // 폼 제출 방지
+        alert("감사합니다! 상담 요청이 접수되었습니다."); // 팝업 메시지
+        window.location.href = "/"; // 팝업 확인 후 홈 페이지로 리디렉션
+    });
+</script>
+
+</body>
+</html>

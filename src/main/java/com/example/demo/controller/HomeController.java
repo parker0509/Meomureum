@@ -11,8 +11,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 
@@ -29,7 +31,7 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    @Operation(summary = " 방 목록 조회 ", description = " 방 목록 모든 조회 페이지")
+    @Operation(summary = "방 목록 조회", description = "방 목록 모든 조회 페이지")
     public String getHomeRooms(Model model, @AuthenticationPrincipal User user) {
 
         // 로그인한 사용자 정보가 있으면
@@ -43,15 +45,81 @@ public class HomeController {
 
         // 최신 방을 가장 위에 띄우고, 그 외의 방들을 내림차순으로 가져오기
         List<Room> newrooms = roomService.getLatestRooms();
+        // 최신 3개 방만 가져오기
+        if (newrooms.size() > 3) {
+            newrooms = newrooms.subList(0, 3); // 첫 3개 방만 가져오기
+        }
         model.addAttribute("newrooms", newrooms);
 
         // 최신 4개 방을 제외한 나머지 방들
         List<Room> otherRooms = roomService.getRemainingRooms(); // getRemainingRooms 메소드에서 나머지 방들을 리턴
         model.addAttribute("otherRooms", otherRooms);
 
-
         return "home";
     }
+
+
+
+    @GetMapping("/api/guest")
+
+    public String getguestRoom(){
+        return "guest-room";
+    }
+
+    @GetMapping("/api/oneroom")
+
+    public String getOneRoom(){
+        return "one-room";
+    }
+
+
+    @GetMapping("/api/pet")
+
+    public String getWithPetRoom(){
+        return "pet-room";
+    }
+
+    @GetMapping("/api/share")
+
+    public String getShareRoom(){
+        return "share-room";
+    }
+
+    @GetMapping("/api/coliving")
+
+    public String getColiving(){
+        return "coliving-room";
+    }
+
+    @GetMapping("/api/youth")
+    public String getYouth(){
+        return "youth-room";
+    }
+
+    @GetMapping("/api/mate")
+
+    public String getMate(){
+        return "mate-room";
+    }
+
+    @GetMapping("/api/deal") @ResponseBody
+    public String getDeal(){
+        return "deal-room";
+    }
+
+    @GetMapping("/api/discount")
+
+    public String getDiscount(){
+        return "discount-room";
+    }
+
+    @GetMapping("/api/video")
+
+    public String getVideo(){
+        return "video-room";
+    }
+
+
 
 
 

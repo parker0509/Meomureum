@@ -95,8 +95,9 @@ class RoomController {
     }
 
     @GetMapping("/map")
-    public String getkakaoMap(){
+    public String getkakaoMap() {
         return "map";
     }
+
 
 }

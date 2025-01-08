@@ -43,8 +43,9 @@ public class UserController {
     public String joinUser(@ModelAttribute User user){
 
         userService.createUser(user);
+        System.out.println(user +" 님의 회원 가입이 완료 되었습니다.");
 
-        return "redirect:/login";
+        return "redirect:/api/login";
     }
 
 

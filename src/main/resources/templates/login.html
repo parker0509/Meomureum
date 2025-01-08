@@ -1,32 +1,126 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인 폼</title>
+    <style>
+        /* 전체 페이지 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* 로그인 폼 스타일 */
+        .login-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* 입력 필드 스타일 */
+        .login-container input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            background-color: #fafafa;
+        }
+
+        .login-container input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        /* 오류 메시지 스타일 */
+        .error-message {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* 로그인 버튼 스타일 */
+        .login-container button {
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 회원가입 링크 스타일 */
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signup-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
 </head>
 <body>
-<form action="/api/login" method="POST">
-    <label for="username">이메일 : </label>
-    <input type="text" id="username" name="username" required>
-    <p>
-    </p>
-    <label for="password">비밀번호 : </label>
-    <input type="password" id="password" name="password" required>
 
-    <button type="submit">Login</button>
-<p>
+<div class="login-container">
+    <h2>로그인</h2>
+    <form action="/api/login" method="POST">
+        <label for="username">이메일</label>
+        <input type="text" id="username" name="username" placeholder="이메일을 입력하세요" required>
 
-</p>
-    <div>
-        <span th:if="${param.error}" style="color:red;">아이디 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요.</span>
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+
+        <button type="submit">로그인</button>
+
+
+        <!-- 오류 메시지 -->
+        <div class="error-message">
+            <span th:if="${param.error}">아이디 또는 비밀번호가 잘못되었습니다. 다시 시도해주세요.</span>
+        </div>
+    </form>
+
+    <!-- 회원가입 링크 -->
+    <div class="signup-link">
+        <p>회원이 아니신가요? <a href="/api/join">회원가입</a></p>
     </div>
-</form>
-
-<!-- 회원가입 링크 -->
-<div>
-    <p>회원이 아니신가요? <a href="/api/join">회원가입</a></p>
 </div>
-
 
 </body>
 </html>

@@ -1,0 +1,281 @@
+/* Global Styles */
+body {
+    margin: 5px;
+    padding-bottom: 30px; /* 하단에 여백 추가 */
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #E1E3E8;
+}
+
+h1, h3 {
+    margin: 0.5rem;
+    margin-bottom: 0.3rem;
+    color: #333;
+}
+
+h2{
+color: #FFF;
+}
+
+
+/* Header Section */
+.header {
+    text-align: center;
+    margin: 30px;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin: 10px auto;
+}
+
+.search-bar input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 25px 0 0 25px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+}
+
+/* Icons Grid */
+.icons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 20px;
+}
+
+.icon-item {
+    text-align: center;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.icon-item img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.icon-item p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Highlight Banner */
+.highlight-banner {
+    text-align: center;
+    margin: 40px;
+    padding: 15px;
+    background-color: #cce5ff;
+    border-radius: 10px;
+
+}
+
+.highlight-banner span {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.highlight-banner button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+/* Cards Section */
+.card {
+    width: 200px; /* 고정된 너비 */
+    height: 200px; /* 고정된 높이 */
+    position: relative; /* img의 부모로 기준점 설정 */
+    background-size: cover;
+    background-position: center;
+        overflow: hidden; /* 이미지가 카드의 영역을 넘지 않도록 설정 */
+        border-radius: 10px; /* 카드 전체의 둥근 모서리 설정 */
+}
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card-content {
+    position: relative; /* 텍스트를 이미지 위에 배치 */
+    z-index: 1; /* 텍스트가 이미지보다 앞에 보이도록 설정 */
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* 텍스트 테두리 효과 */ /* 텍스트 색상을 흰색으로 설정하여 이미지 위에서 보이게 */
+    padding: 10px;
+}
+
+.card h3 {
+    font-size: 16px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.card p {
+    flex-grow: 1; /* 텍스트가 추가될 공간을 자동으로 차지하도록 설정 */
+}
+
+.card img {
+    width: 100%; /* 카드 너비에 맞춤 */
+    height: 200%; /* 카드 높이에 맞춤 */
+    object-fit: cover; /* 비율 유지하며 크기 맞춤 */
+    border-radius: 10px; /* 모서리를 둥글게 */
+    position: absolute; /* 카드 내부에서 절대 위치 */
+    z-index: -1; /* 텍스트 뒤로 보내기 */
+}
+
+/* Footer Section */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 54.5%;
+    left: 50%; /* 화면의 50% 위치로 설정 */
+    background: #fff;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    transform: translateX(-50%); /* 50% 왼쪽에서 다시 50% 이동하여 정확히 중앙에 배치 */
+
+}
+
+.footer nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #007BFF;
+}
+.container {
+    max-width: 800px; /* 페이지 전체의 최대 너비를 설정 */
+    margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬 */
+    padding: 0 15px; /* 콘텐츠 좌우에 약간의 패딩 추가 */
+    padding-top: 20px;  /* 위쪽 여백 추가 */
+    padding-bottom: 10px; /* 하단에 여백 추가 */
+    background-color: #ffffff; /* 컨텐츠 영역의 배경색 */
+}
+
+a {
+    text-decoration: none;
+}
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.5rem; /* 상하 간격과 좌우 간격 조정 */
+            background-color: #fff;
+            color: black;
+            position: relative; /* 위치 조정 가능하게 설정 */
+            top: -40px; /* 상단에 더 붙이기 */
+        }
+
+        .navbar .brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .navbar .menu a {
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            color: black;
+            background-color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar .menu a:hover {
+            background-color: #004494;
+        }
+
+        .navbar .menu .username {
+            font-weight: bold;
+            background-color: transparent;
+            color: #ffffff;
+            pointer-events: none;
+        }
+
+.room-container {
+    display: flex;
+    flex-wrap: wrap; /* 카드들이 공간을 넘칠 경우 자동으로 줄바꿈 */
+    gap: 20px; /* 카드 간의 간격 */
+}
+        .room-card {
+            width: 250px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            background-color: #fff;
+            margin-bottom: 20px;
+            transition: transform 0.2s ease;
+        }
+
+        .room-card:hover {
+            transform: scale(1.05);
+        }
+
+        .room-card-image img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .room-card-body {
+            padding: 10px;
+        }
+
+        .room-card-title {
+            font-size: 1.1rem;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+
+        .room-card-price {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        @media (max-width: 768px) {
+            .room-card {
+                margin-bottom: 15px;
+            }
+
+            .room-card-title {
+                font-size: 1rem;
+            }
+
+            .room-card-price {
+                font-size: 0.8rem;
+            }
+        }
+

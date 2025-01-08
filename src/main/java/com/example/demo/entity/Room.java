@@ -24,7 +24,7 @@ public class Room {
     private double rentalPrice;  // 임대료
     private String location;  // 위치
     private String description;
-    private String RoomUse;
+    private String roomUse;
     private int roomNumber; // 방수
     private int toilet; // 화장실 수
     private int living; // 거실 수
@@ -122,11 +122,11 @@ public class Room {
     }
 
     public String getRoomUse() {
-        return RoomUse;
+        return roomUse;
     }
 
     public void setRoomUse(String roomUse) {
-        RoomUse = roomUse;
+        this.roomUse = roomUse;
     }
 
     public int getRoomNumber() {

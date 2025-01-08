@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>머무름</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@500;600&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+
+<!-- Display Products -->
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">LayOver</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- 로그인한 경우 -->
+                <li class="nav-item" th:if="${username != null}">
+                    <span class="nav-link"><span th:text="${username}+' 님'">User</span></span>
+                </li>
+
+
+                <li class="nav-item"><a class="nav-link" href="/api/admin">방 등록</a></li>
+                <li class="nav-item"><a class="nav-link" href="/api/room">방</a></li>
+                <!-- 로그인하지 않은 경우 로그인/회원가입 버튼 표시 -->
+                <li class="nav-item" th:if="${username == null}">
+                    <a class="nav-link" href="/api/login">회원가입/로그인</a>
+                </li>
+
+                <!-- 로그인한 경우 로그아웃 버튼 표시 -->
+                <li class="nav-item" th:if="${username != null}">
+                    <a class="nav-link" href="/logout">로그아웃</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+<!-- 하단 카테고리 메뉴 -->
+<div class="category-menu">
+    <button class="category-btn">☰ 카테고리</button>
+    <div class="menu-links">
+        <a href="#">1주</a>
+        <a href="#">2주</a>
+        <a href="#">4주</a>
+        <a href="#">1달</a>
+        <a href="#">단기</a>
+        <a href="/api/room/map">지도</a>
+        <a href="#">이벤트</a>
+    </div>
+</div>
+
+<div class="search-container">
+    <h3>원하는 방을 찾아보세요</h3>
+    <div class="search-box">
+        <input type="text" class="search-input" placeholder="검색어를 입력하세요">
+        <button class="search-btn">검색</button>
+    </div>
+</div>
+
+
+<!-- 신규 방 섹션 -->
+<h3 class="new-rooms-title">스테이에서 추천하는! 신규 방</h3>
+<h5 class="new-rooms-subtitle">이런 방은 어떠세요?</h5>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3" th:each="room : ${newrooms}">
+            <div class="room-card">
+                <a th:href="@{/api/room/{id}(id=${room.id})}">
+                    <div class="room-card-image">
+                        <img th:src="@{${room.roomImageUri}}" alt="Room Image" class="img-fluid">
+                    </div>
+                    <div class="room-card-body">
+                        <h5 class="room-card-title" th:text="${room.roomName}">방 이름</h5>
+                        <p class="room-card-price" th:text="${room.rentalPrice}">가격</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 나머지 방 보기 버튼 -->
+<div class="text-center">
+    <button id="showMoreRooms" class="btn btn-primary mt-3">나머지 방 보기</button>
+</div>
+<!-- 나머지 방들 -->
+<div id="remainingRooms" class="container mt-5" style="display:none;">
+    <h4>나머지 방들</h4>
+    <div class="row">
+        <div class="col-md-3" th:each="room : ${otherRooms}">
+            <a th:href="@{/api/room/{id}(id=${room.id})}" class="card mb-3">
+                <img th:src="${room.roomImageUri}" class="room-card-img" alt="Room Image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${room.roomName}">방 이름</h5>
+                    <p class="card-text" th:text="${room.rentalPrice + ' 원 / 1주'}"> / 1주</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="container mt-5">
+    <h4>방 목록</h4>
+    <div class="row">
+        &lt;!&ndash; 반복문을 통해 방 목록 출력 &ndash;&gt;
+        <div class="col-md-3" th:each="room : ${rooms}">
+            &lt;!&ndash; 카드에 'card' 클래스 추가하고, 링크로 감싸기 &ndash;&gt;
+            <a th:href="@{/room/{id}(id=${room.id})}" class="card mb-3">
+                &lt;!&ndash; 이미지 태그에 이미지 경로를 동적으로 추가 &ndash;&gt;
+                <img th:src="${room.roomImageUri}" class="room-card-img" alt="Room Image">
+                <div class="card-body">
+                    &lt;!&ndash; 방 이름, 주소, 가격 정보를 동적으로 표시 &ndash;&gt;
+                    <h5 class="card-title" th:text="${room.roomName}">방 이름</h5>
+                    <p class="card-text" th:text="${room.address}">주소</p>
+                    <p class="card-text" th:text="${room.rentalPrice + ' 원 / 1주'}"> / 1주</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>-->
+
+
+<!-- Footer -->
+<footer class="footer">
+
+    <div class="hero">
+        <div class="hero-images" id="heroImages">
+            <img src="/home-instr1.png" alt="Image 1">
+            <img src="/home-instr2.png" alt="Image 2">
+            <img src="/home-instr3.png" alt="Image 3">
+        </div>
+        <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <p>&copy; 2024 머무름. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+</footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+
+<script>
+    // "열기" 버튼 클릭 시 나머지 방 표시
+       document.getElementById('showMoreRooms').addEventListener('click', function() {
+           var remainingRooms = document.getElementById('remainingRooms');
+           remainingRooms.style.display = 'block'; // 숨겨진 방을 보여줌
+           this.style.display = 'none'; // "열기" 버튼 숨기기
+       });
+
+       // JavaScript for auto slider, dots, and drag functionality
+       const imagesContainer = document.querySelector('.hero-images');
+       const dots = document.querySelectorAll('.dot');
+       const images = document.querySelectorAll('.hero img');
+       const imageCount = images.length;
+
+       let currentIndex = 0;
+       let isDragging = false;
+       let startPos = 0;
+       let currentTranslate = 0;
+       let prevTranslate = 0;
+       let animationID;
+
+       // 자동 슬라이더
+       function startAutoSlide() {
+           setInterval(() => {
+               moveToNextSlide();
+           }, 6000); // 3초마다 이미지 변경
+       }
+
+       // 다음 슬라이드로 이동
+       function moveToNextSlide() {
+           currentIndex = (currentIndex + 1) % imageCount;
+           updateSliderPosition();
+           updateDots();
+       }
+
+       // 슬라이더 위치 업데이트
+       function updateSliderPosition() {
+           currentTranslate = -currentIndex * 100;
+           imagesContainer.style.transform = `translateX(${currentTranslate}%)`;
+       }
+
+       // 점(dot) 업데이트
+       function updateDots() {
+           dots.forEach((dot, index) => {
+               dot.classList.toggle('active', index === currentIndex);
+           });
+       }
+
+       // 점 클릭으로 이동
+       dots.forEach((dot, index) => {
+           dot.addEventListener('click', () => {
+               currentIndex = index;
+               updateSliderPosition();
+               updateDots();
+           });
+       });
+
+       // 드래그 이벤트
+       imagesContainer.addEventListener('mousedown', startDrag);
+       imagesContainer.addEventListener('mouseup', endDrag);
+       imagesContainer.addEventListener('mouseleave', endDrag);
+       imagesContainer.addEventListener('mousemove', drag);
+
+       function startDrag(e) {
+           isDragging = true;
+           startPos = e.clientX;
+           prevTranslate = currentTranslate;
+           cancelAnimationFrame(animationID);
+       }
+
+       function endDrag() {
+           isDragging = false;
+           const movedBy = currentTranslate - prevTranslate;
+
+           if (movedBy < -50 && currentIndex < imageCount - 1) currentIndex++;
+           if (movedBy > 50 && currentIndex > 0) currentIndex--;
+
+           updateSliderPosition();
+           updateDots();
+       }
+
+       function drag(e) {
+           if (!isDragging) return;
+           const currentPos = e.clientX;
+           currentTranslate = prevTranslate + ((currentPos - startPos) / window.innerWidth) * 100;
+           imagesContainer.style.transform = `translateX(${currentTranslate}%)`;
+       }
+
+       // 초기화
+       updateSliderPosition();
+       updateDots();
+       startAutoSlide();
+</script>
+
+</body>
+</html>

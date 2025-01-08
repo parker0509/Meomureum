@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
+    <style>
+
+        #addressQuery
+            {
+            display: none;
+            }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>방 등록</title>
@@ -39,9 +47,6 @@
     <input type="number" id="kitchen" name="kitchen" required><br><br>
 
 
-
-
-
     <!-- 전용 면적 -->
     <label for="area">전용 면적:</label>
     <input type="number" id="area" name="area" required><br><br>
@@ -61,9 +66,8 @@
     <p>
 
         <!-- 주소 쿼리 -->
-        <label for="addressQuery">주소 쿼리:</label>
+        <label for="addressQuery"></label>
         <input type="text" id="addressQuery" name="addressQuery" required><br><br>
-
 
 
     </p>
@@ -83,13 +87,11 @@
     <input type="checkbox" id="smokingAllowed" name="smokingAllowed"><br><br>
 
 
-
     <!-- 등록 버튼 -->
     <button type="submit">등록</button>
 </form>
 
 </body>
-
 
 
 <script>
@@ -110,11 +112,11 @@
         new daum.Postcode({
             oncomplete: function(data) {
                 var addr = data.address;
-                var fulladdr = data.address;
+                //var fulladdr = data.address;
 
                 document.getElementById("sample5_address").value = addr;
                 document.getElementById("address").value = addr;
-                document.getElementById('addressQuery').value = fulladdr;
+                document.getElementById('addressQuery').value = addr;
 
 
 

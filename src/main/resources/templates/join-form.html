@@ -8,7 +8,7 @@
 <body>
 <h2>회원가입</h2>
 
-<form action="#" th:action="@{/join}" method="post" th:object="${user}">
+<form action="#" th:action="@{/api/join}" method="post" th:object="${user}">
     <label for="username">이름:</label>
     <input type="text" id="username" name="username" th:field="*{name}" required /><br><br>
 
