@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-
 import com.example.demo.entity.Room;
 import com.example.demo.service.RoomService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -99,5 +98,68 @@ class RoomController {
         return "map";
     }
 
+    @GetMapping("/oneroom")
+    public String getOneRoom(@RequestParam(name = "id", required = false, defaultValue = "1")Long id, Model model) {
+
+        Room room = roomService.getByRoomID(id);
+
+        //Room >> One-room.html (Get)
+        model.addAttribute("room", room);
+
+        return "one-room";
+    }
+
+    @GetMapping("/guest")
+    public String getguestRoom() {
+        return "guest-room";
+    }
+
+
+    @GetMapping("/pet")
+
+    public String getWithPetRoom() {
+        return "pet-room";
+    }
+
+    @GetMapping("/share")
+
+    public String getShareRoom() {
+        return "share-room";
+    }
+
+    @GetMapping("/coliving")
+
+    public String getColiving() {
+        return "coliving-room";
+    }
+
+    @GetMapping("/youth")
+    public String getYouth() {
+        return "youth-room";
+    }
+
+    @GetMapping("/mate")
+
+    public String getMate() {
+        return "mate-room";
+    }
+
+    @GetMapping("/deal")
+    @ResponseBody
+    public String getDeal() {
+        return "deal-room";
+    }
+
+    @GetMapping("/discount")
+
+    public String getDiscount() {
+        return "discount-room";
+    }
+
+    @GetMapping("/video")
+
+    public String getVideo() {
+        return "video-room";
+    }
 
 }

@@ -60,67 +60,6 @@ public class HomeController {
 
 
 
-    @GetMapping("/api/guest")
-
-    public String getguestRoom(){
-        return "guest-room";
-    }
-
-    @GetMapping("/api/oneroom")
-
-    public String getOneRoom(){
-        return "one-room";
-    }
-
-
-    @GetMapping("/api/pet")
-
-    public String getWithPetRoom(){
-        return "pet-room";
-    }
-
-    @GetMapping("/api/share")
-
-    public String getShareRoom(){
-        return "share-room";
-    }
-
-    @GetMapping("/api/coliving")
-
-    public String getColiving(){
-        return "coliving-room";
-    }
-
-    @GetMapping("/api/youth")
-    public String getYouth(){
-        return "youth-room";
-    }
-
-    @GetMapping("/api/mate")
-
-    public String getMate(){
-        return "mate-room";
-    }
-
-    @GetMapping("/api/deal") @ResponseBody
-    public String getDeal(){
-        return "deal-room";
-    }
-
-    @GetMapping("/api/discount")
-
-    public String getDiscount(){
-        return "discount-room";
-    }
-
-    @GetMapping("/api/video")
-
-    public String getVideo(){
-        return "video-room";
-    }
-
-
-
 
 
 
