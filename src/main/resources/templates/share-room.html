@@ -1,14 +1,72 @@
-
-<!-- Share Room -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Share Room</title>
+    <title>머무름 - 홈</title>
+    <link rel="stylesheet" href="/css/home/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap">
+
+
 </head>
+
+<script>
+    document.querySelectorAll('.icon-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const link = item.querySelector('a');
+            if (link) {
+                window.location.href = link.href;
+            }
+        });
+    });
+</script>
+
 <body>
-<h1>Share Room</h1>
-<p>Welcome to the Share Room page!</p>
+<div class="container">
+    <header class="header">
+
+        <nav class="navbar">
+            <div class="brand">머무름</div>
+            <div class="menu">
+                <!-- 로그인한 경우 -->
+                <span class="username" th:if="${username != null}" th:text="${username} + ' 님'">User</span>
+                <a href="/api/admin">예약 확인</a>
+                <a href="/api/room">방</a>
+
+                <!-- 로그인하지 않은 경우 로그인/회원가입 버튼 표시 -->
+                <a href="/api/login" th:if="${username == null}">회원가입/로그인</a>
+
+                <!-- 로그인한 경우 로그아웃 버튼 표시 -->
+                <a href="/logout" th:if="${username != null}">로그아웃</a>
+            </div>
+        </nav>
+
+        <!-- 나머지 방들 -->
+        <div id="remainingRooms" class="container mt-5" style="display:none;">
+            <h4>나머지 방들</h4>
+            <div class="row">
+                <div class="col-md-3" th:each="room : ${room}">
+                    <a th:href="@{/api/room/{id}(id=${room.id})}" class="card mb-3">
+                        <img th:src="${room.roomImageUri}" class="room-card-img" alt="Room Image">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${room.roomName}">방 이름</h5>
+                            <p class="card-text" th:text="${room.rentalPrice + ' 원 / 1주'}"> / 1주</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </header>
+</div>
+<footer class="footer">
+    <nav>
+        <a href="#">홈</a>
+        <a href="/api/room/map">지도</a>
+        <a href="#">피드</a>
+        <a href="#">더보기</a>
+    </nav>
+</footer>
 </body>
 </html>
+
