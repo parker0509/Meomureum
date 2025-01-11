@@ -48,17 +48,35 @@ public class RoomService {
 
 
 
+
     /*
-        Room room = roomService.createRoomswithAddress(roomName, area, rentalPrice, addressQuery,description,roomImageUri,roomUse);
-        */
+        추가 내용: 아래 파라미터들이 Room 객체 생성에 추가되었습니다.
+        - 애완견 동반 여부(petAllowed)
+        - 금연 여부(smokingAllowed)
+        - 단기 가능 여부(shortTerm)
+        - 주차 가능 여부(parkingAvailable)
+        - 여성 전용 여부(femaleOnly)
+        - 관리비 없음 여부(noMaintenanceFee)
+        - 식사 제공 여부(mealProvided)
+        - 방 유형(roomType)
+    */
+
     public Room createRoomswithAddress(String roomName,
                                        double area,
                                        double rentalPrice,
                                        String addressQuery,
                                        String description,
                                        String roomImageUri,
-                                       String roomUse
+                                       String roomUse,
+                                       boolean petAllowed,
+                                       boolean smokingAllowed,
+                                       boolean shortTerm,
+                                       boolean parkingAvailable,
+                                       boolean femaleOnly,
+                                       boolean noMaintenanceFee,
+                                       boolean mealProvided,
 
+                                       String roomType
     ) {
 
 
@@ -75,6 +93,16 @@ public class RoomService {
         room.setLocation(roomUse);
         room.setDescription(description);
         room.setRoomImageUri(roomImageUri);
+
+// 추가 내용
+        room.setPetAllowed(petAllowed); // 애완견 동반 여부
+        room.setRoomType(roomType); // 방 유형
+        room.setFemaleOnly(femaleOnly); // 여성 전용 여부
+        room.setMealProvided(mealProvided); // 식사 제공 여부
+        room.setSmokingAllowed(smokingAllowed); // 금연 여부
+        room.setNoMaintenanceFee(noMaintenanceFee); // 관리비 없음 여부
+        room.setShortTerm(shortTerm); // 단기 가능 여부
+        room.setParkingAvailable(parkingAvailable); // 주차 가능 여부
 
 
         // Room을 DB에 저장합니다.
@@ -159,6 +187,17 @@ public class RoomService {
         }
         return roomRepository.findAll();
 
+    }
+
+    public List<Room> getRoomsByRoomTypes(List<String> roomType) {
+
+        if (roomType == null || roomType.isEmpty()) {
+
+            throw new IllegalArgumentException("roomTypes 값이 비어 있습니다. 필터 조건을 제공해주세요.");
+
+        } else {
+            return roomRepository.findByRoomTypeIn(roomType);
+        }
     }
 
 

@@ -42,42 +42,38 @@
 <p></p>
 <p></p>
 
-
+<!-- message가 존재하면 표시 -->
+<div th:if="${message}">
+    <p th:text="${message}" style="color: red; font-weight: bold;"></p>
+</div>
 
 
 <div class="container">
-        <div class="room-container">
-
-            <!-- message가 존재하면 표시 -->
-            <div th:if="${message}">
-                <p th:text="${message}" style="color: red; font-weight: bold;"></p>
-            </div>
-
-
-            <div class="room-card" th:each="room : ${rooms}">
-                <a th:href="@{/api/room/{id}(id=${room.id})}">
-                    <div class="room-card-image">
-                        <img th:src="@{${room.roomImageUri}}" alt="Room Image" class="img-fluid">
-                    </div>
-                    <div class="room-card-content">
-                        <h5 class="room-card-title" th:text="${room.roomName}">방 이름</h5>
-                        <p class="room-card-price" th:text="${room.rentalPrice}">가격</p>
-                    </div>
-                </a>
-            </div>
+    <div class="room-container">
+        <div class="room-card" th:each="room : ${rooms}">
+            <a th:href="@{/api/room/{id}(id=${room.id})}">
+                <div class="room-card-image">
+                    <img th:src="@{${room.roomImageUri}}" alt="Room Image" class="img-fluid">
+                </div>
+                <div class="room-card-content">
+                    <h5 class="room-card-title" th:text="${room.roomName}">방 이름</h5>
+                    <p class="room-card-price" th:text="${room.rentalPrice}">가격</p>
+                </div>
+            </a>
         </div>
     </div>
+</div>
 
 
-    </body>
-    <footer class="footer">
-        <nav>
-            <a href="#">홈</a>
-            <a href="/api/room/map">지도</a>
-            <a href="#">피드</a>
-            <a href="#">더보기</a>
-        </nav>
-    </footer>
+</body>
+<footer class="footer">
+    <nav>
+        <a href="#">홈</a>
+        <a href="/api/room/map">지도</a>
+        <a href="#">피드</a>
+        <a href="#">더보기</a>
+    </nav>
+</footer>
 
 </html>
 

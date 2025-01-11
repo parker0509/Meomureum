@@ -30,6 +30,79 @@ public class Room {
     private int living; // 거실 수
     private int kitchen; // 부엌 수
 
+    private Boolean shortTerm;
+    private Boolean parkingAvailable;
+    private Boolean femaleOnly;
+    private Boolean noMaintenanceFee;
+    private Boolean mealProvided;
+    private Boolean PetAllowed;
+    private Boolean SmokingAllowed;
+    private String roomType;
+
+
+    public Boolean getSmokingAllowed() {
+        return SmokingAllowed;
+    }
+
+    public void setSmokingAllowed(Boolean smokingAllowed) {
+        SmokingAllowed = smokingAllowed;
+    }
+
+    public Boolean getPetAllowed() {
+        return PetAllowed;
+    }
+
+    public void setPetAllowed(Boolean petAllowed) {
+        PetAllowed = petAllowed;
+    }
+
+    public Boolean getShortTerm() {
+        return shortTerm;
+    }
+
+    public void setShortTerm(Boolean shortTerm) {
+        this.shortTerm = shortTerm;
+    }
+
+    public Boolean getParkingAvailable() {
+        return parkingAvailable;
+    }
+
+    public void setParkingAvailable(Boolean parkingAvailable) {
+        this.parkingAvailable = parkingAvailable;
+    }
+
+    public Boolean getFemaleOnly() {
+        return femaleOnly;
+    }
+
+    public void setFemaleOnly(Boolean femaleOnly) {
+        this.femaleOnly = femaleOnly;
+    }
+
+    public Boolean getNoMaintenanceFee() {
+        return noMaintenanceFee;
+    }
+
+    public void setNoMaintenanceFee(Boolean noMaintenanceFee) {
+        this.noMaintenanceFee = noMaintenanceFee;
+    }
+
+    public Boolean getMealProvided() {
+        return mealProvided;
+    }
+
+    public void setMealProvided(Boolean mealProvided) {
+        this.mealProvided = mealProvided;
+    }
+
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id" , nullable = false)

@@ -86,7 +86,51 @@
     <label for="smokingAllowed">금연 여부:</label>
     <input type="checkbox" id="smokingAllowed" name="smokingAllowed"><br><br>
 
+    <!-- 필터 관련 항목 -->
+    <div class="filter-section">
+        <h3>필터 항목</h3>
+        <!-- 단기 가능 -->
+        <label for="shortTerm">
+            <input type="checkbox" id="shortTerm" name="shortTerm">
+            단기 가능
+        </label><br>
 
+        <!-- 주차 가능 -->
+        <label for="parkingAvailable">
+            <input type="checkbox" id="parkingAvailable" name="parkingAvailable">
+            주차 가능
+        </label><br>
+
+        <!-- 여성 전용 -->
+        <label for="femaleOnly">
+            <input type="checkbox" id="femaleOnly" name="femaleOnly">
+            여성 전용
+        </label><br>
+
+        <!-- 관리비 없음 -->
+        <label for="noMaintenanceFee">
+            <input type="checkbox" id="noMaintenanceFee" name="noMaintenanceFee">
+            관리비 없음
+        </label><br>
+
+        <!-- 식사 제공 -->
+        <label for="mealProvided">
+            <input type="checkbox" id="mealProvided" name="mealProvided">
+            식사 제공
+        </label><br>
+
+        <!-- 방 유형 -->
+        <label for="roomType">방 유형:</label>
+        <select id="roomType" name="roomType">
+            <option value="single">1인실</option>
+            <option value="double">2인실</option>
+            <option value="shared">쉐어하우스</option>
+            <option value="coliving">코리빙</option>
+            <option value="apart">아파트</option>
+            <option value="villa">빌라</option>
+            <option value="officetel">오피스텔</option>
+        </select>
+    </div>
     <!-- 등록 버튼 -->
     <button type="submit">등록</button>
 </form>
