@@ -82,7 +82,7 @@ class RoomController {
     }
 
 
-// Room 생성 API
+    // Room 생성 API
     @PostMapping("/new")
     public ResponseEntity<Room> createRoom(
             @RequestParam(name = "roomName") String roomName,
@@ -92,7 +92,7 @@ class RoomController {
             @RequestParam(name = "description") String description,
             @RequestParam(name = "roomImageUri") String roomImageUri,
             @RequestParam(name = "roomUse") String roomUse,
-            @RequestParam(name = "petAllowed" , required = false) boolean petAllowed,
+            @RequestParam(name = "petAllowed", required = false) boolean petAllowed,
             @RequestParam(name = "smokingAllowed", required = false) boolean smokingAllowed,
             @RequestParam(name = "shortTerm", required = false) boolean shortTerm,
             @RequestParam(name = "parkingAvailable", required = false) boolean parkingAvailable,
@@ -111,17 +111,16 @@ class RoomController {
     }
 
 
-
     //  Filter 핕터 파트
 
     @GetMapping("/filter")
-    public ResponseEntity<?> getFilterRoomsType(@RequestParam (name="roomTypes" , required = false) List<String> roomTypes, Model model){
+    public ResponseEntity<?> getFilterRoomsType(@RequestParam(name = "roomTypes", required = false) List<String> roomTypes, Model model) {
 
-        try{
+        try {
             List<Room> rooms = roomService.getRoomsByRoomTypes(roomTypes);
             return ResponseEntity.ok(rooms);
 
-        }catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
@@ -133,19 +132,19 @@ class RoomController {
         return "map";
     }
 
-/*    @GetMapping("/oneroom")
-    public String getOneRoom() {
-        return "one-room";
-    }*/
+    /*    @GetMapping("/oneroom")
+        public String getOneRoom() {
+            return "one-room";
+        }*/
     @GetMapping("/oneroom")
-    public String getRemainingRooms(Model model){
-        List<Room>rooms = roomService.getRoomsByRoomTypes(Collections.singletonList("single"));
+    public String getRemainingRooms(Model model) {
+        List<Room> rooms = roomService.getRoomsByRoomTypes(Collections.singletonList("single"));
 
         if (rooms.isEmpty()) {
             model.addAttribute("message", "등록된 원룸이 없습니다.");  // 방이 없을 때 메시지 추가
         }
 
-        model.addAttribute("rooms",rooms);
+        model.addAttribute("rooms", rooms);
         return "one-room";
     }
 
@@ -153,9 +152,11 @@ class RoomController {
     public String getguestRoom() {
         return "guest-room";
     }
-    @GetMapping("/pet")
 
-    public String getWithPetRoom() {
+    @GetMapping("/pet")
+    public String getWithPetRoom(Model model) {
+        List<Room> petroom = roomService.getRoomsByPetAllowedTure();
+        model.addAttribute("rooms", petroom);
         return "pet-room";
     }
 
@@ -167,7 +168,7 @@ class RoomController {
             model.addAttribute("message", "등록된 원룸이 없습니다.");  // 방이 없을 때 메시지 추가
         }
 
-        model.addAttribute("rooms",rooms);
+        model.addAttribute("rooms", rooms);
         return "share-room";
     }
 
@@ -179,7 +180,7 @@ class RoomController {
             model.addAttribute("message", "등록된 원룸이 없습니다.");  // 방이 없을 때 메시지 추가
         }
 
-        model.addAttribute("rooms",rooms);
+        model.addAttribute("rooms", rooms);
         return "coliving-room";
     }
 
@@ -191,7 +192,7 @@ class RoomController {
             model.addAttribute("message", "등록된 원룸이 없습니다.");  // 방이 없을 때 메시지 추가
         }
 
-        model.addAttribute("rooms",rooms);
+        model.addAttribute("rooms", rooms);
         return "officetel-room";
     }
 
@@ -203,26 +204,45 @@ class RoomController {
             model.addAttribute("message", "등록된 원룸이 없습니다.");  // 방이 없을 때 메시지 추가
         }
 
-        model.addAttribute("rooms",rooms);
+        model.addAttribute("rooms", rooms);
         return "apt-room";
     }
 
     @GetMapping("/deal")
-    @ResponseBody
-    public String getDeal() {
+    public String getDeal(Model model) {
+
         return "deal-room";
     }
 
-    @GetMapping("/discount")
 
+    @GetMapping("/discount")
     public String getDiscount() {
         return "discount-room";
     }
 
     @GetMapping("/video")
-
     public String getVideo() {
         return "video-room";
     }
+
+
+
+    // 기능 추가 NEW , HOT
+    // NEW 기능 - 최신 룸 목록
+    @GetMapping("/newrooms")
+    public String getNewRooms(Model model) {
+        List<Room> newRooms = roomService.getNewRooms();
+        model.addAttribute("rooms", newRooms);
+        return "newRooms"; // newRooms.html로 데이터를 전달
+    }
+
+    // HOT 기능 - 인기 룸 목록
+    @GetMapping("/hotrooms")
+    public String getHotRooms(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, Model model) {
+        List<Room> hotRooms = roomService.getHotRooms(page, size);
+        model.addAttribute("rooms", hotRooms);
+        return "hotRooms"; // hotRooms.html로 데이터를 전달
+    }
+
 
 }

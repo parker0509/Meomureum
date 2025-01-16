@@ -35,7 +35,7 @@ public class Room {
     private Boolean femaleOnly;
     private Boolean noMaintenanceFee;
     private Boolean mealProvided;
-    private Boolean PetAllowed;
+    private Boolean petAllowed;
     private Boolean SmokingAllowed;
     private String roomType;
 
@@ -49,11 +49,11 @@ public class Room {
     }
 
     public Boolean getPetAllowed() {
-        return PetAllowed;
+        return petAllowed;
     }
 
     public void setPetAllowed(Boolean petAllowed) {
-        PetAllowed = petAllowed;
+        petAllowed = petAllowed;
     }
 
     public Boolean getShortTerm() {
@@ -105,12 +105,37 @@ public class Room {
     }
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id" , nullable = false)
+    @JoinColumn(name = "address_id", nullable = false)
     private Address address;// Address와의 관계 설정
 
 
     // 추가된 created 필드
     private LocalDateTime created;  // 방 생성 시간을 저장
+
+/*
+    // ⚡ 추가 된 기능
+    // 01-15 추가 된 기능 NEW / HOT
+*/
+
+    private int viewCount;
+
+    /*
+
+        Getter , Setter 부분
+
+     */
+
+
+
+
+    public int getViewCount() {
+        return viewCount;
+    }
+
+    // 01-15 추가 된 기능 NEW / HOT
+    public void setViewCount(int viewCount) {
+        this.viewCount = viewCount;
+    }
 
     @PrePersist
     public void prePersist() {
@@ -130,7 +155,6 @@ public class Room {
     public LocalDateTime getCreated() {
         return created;
     }
-
 
 
     public void setCreated(LocalDateTime created) {

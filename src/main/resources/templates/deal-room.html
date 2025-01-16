@@ -42,7 +42,10 @@
 <p></p>
 <p></p>
 
-
+<!-- message가 존재하면 표시 -->
+<div th:if="${message}">
+    <p th:text="${message}" style="color: red; font-weight: bold;"></p>
+</div>
 
 
 <div class="container">
@@ -74,3 +77,16 @@
 
 </html>
 
+<!--<div class="search-container">
+    <form action="/search" method="GET">
+        <input type="text" name="search" placeholder="지역 또는 방 이름 검색" />
+        <select name="roomType">
+            <option value="">방 유형</option>
+            <option value="one-room">원룸</option>
+            <option value="officetel">오피스텔</option>
+        </select>
+        <input type="number" name="minPrice" placeholder="최소 가격" />
+        <input type="number" name="maxPrice" placeholder="최대 가격" />
+        <button type="submit">검색</button>
+    </form>
+</div>-->

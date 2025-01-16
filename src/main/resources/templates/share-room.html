@@ -47,6 +47,12 @@
 
 <div class="container">
     <div class="room-container">
+
+        <!-- message가 존재하면 표시 -->
+        <div th:if="${message}">
+            <p th:text="${message}" style="color: red; font-weight: bold;"></p>
+        </div>
+
         <div class="room-card" th:each="room : ${rooms}">
             <a th:href="@{/api/room/{id}(id=${room.id})}">
                 <div class="room-card-image">

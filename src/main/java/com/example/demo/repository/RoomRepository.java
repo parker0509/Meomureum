@@ -3,8 +3,10 @@ package com.example.demo.repository;
 
 import com.example.demo.entity.Room;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,5 +32,25 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     List<Room> findByRoomTypeIn(List<String> roomTypes);
 
+    List<Room> findByPetAllowedTrue();
 
+
+    /*
+         • 추가 기능 01 - 15
+
+         1 . 게시판 NEW / HOT 기능 추가
+
+         @QURRY
+
+         SELECT r FROM Room r WHERE r.created > CURRENT_DATE -7
+         SELECT r FROM Room r ORDER BY r.viewCount DESC
+
+     */
+
+
+    @Query(value = "SELECT r FROM Room r WHERE r.created > CURRENT_DATE - INTERVAL 7 DAY", nativeQuery = true)
+    List<Room> findNewRooms();
+
+    @Query("SELECT r FROM Room r ORDER BY r.viewCount DESC")
+    List<Room> findHotRooms(Pageable pageable);
 }

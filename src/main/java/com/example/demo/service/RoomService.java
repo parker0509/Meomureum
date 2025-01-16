@@ -109,7 +109,6 @@ public class RoomService {
         return roomRepository.save(room);
 
 
-
     }
 
 
@@ -198,6 +197,38 @@ public class RoomService {
         } else {
             return roomRepository.findByRoomTypeIn(roomType);
         }
+    }
+
+
+    // 반려 동물 허가 룸 필터 기능 추가 01 - 15 ⚡⚡
+    public List<Room> getRoomsByPetAllowedTure() {
+        return roomRepository.findByPetAllowedTrue();
+    }
+
+
+    // NEW, HOT 기능 추가 01 - 15 ⚡⚡
+    public List<Room> getNewRooms() {
+        return roomRepository.findNewRooms();
+    }
+
+
+    // NEW, HOT 기능 추가 01 - 15 ⚡⚡
+    public List<Room> getHotRooms(int page, int size) {
+        return roomRepository.findHotRooms(PageRequest.of(page, size));
+    }
+
+
+    // Room을 확인시 조회수 하나씩 상승
+    public Room viewRooms(Long roomId) {
+
+        Room room = roomRepository.findById(roomId)
+                .orElseThrow(() -> new RuntimeException("Room not Found"));
+
+        room.setViewCount(room.getViewCount() + 1);
+        roomRepository.save(room);
+
+        return room;
+
     }
 
 

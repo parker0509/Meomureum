@@ -36,30 +36,16 @@
     </header>
 </div>
 <div class="container mt-5">
-    <h3 class="new-rooms-title">  원룸 텔</h3>
+    <h3 class="new-rooms-title"> 방 등록 </h3>
     <h5 class="new-rooms-subtitle"></h5>
 </div>
 <p></p>
 <p></p>
 
 
+호⁠스⁠팅 예⁠상 수⁠입
+₩5000000
 
-
-<div class="container">
-    <div class="room-container">
-        <div class="room-card" th:each="room : ${rooms}">
-            <a th:href="@{/api/room/{id}(id=${room.id})}">
-                <div class="room-card-image">
-                    <img th:src="@{${room.roomImageUri}}" alt="Room Image" class="img-fluid">
-                </div>
-                <div class="room-card-content">
-                    <h5 class="room-card-title" th:text="${room.roomName}">방 이름</h5>
-                    <p class="room-card-price" th:text="${room.rentalPrice}">가격</p>
-                </div>
-            </a>
-        </div>
-    </div>
-</div>
 
 
 </body>
