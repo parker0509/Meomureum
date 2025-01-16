@@ -1,0 +1,148 @@
+/* 기본 설정 */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+/* 전체 컨테이너 */
+.container {
+    max-width: 800px; /* 페이지 전체의 최대 너비를 설정 */
+    margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬 */
+    padding: 0 15px; /* 콘텐츠 좌우에 약간의 패딩 추가 */
+    padding-top: 20px;  /* 위쪽 여백 추가 */
+    padding-bottom: 10px; /* 하단에 여백 추가 */
+    background-color: #ffffff; /* 컨텐츠 영역의 배경색 */
+}
+
+/* 헤더 섹션 */
+.header {
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.header .tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.header .tabs a {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.header .tabs a.active {
+    background-color: #00c6a2;
+    color: white;
+    border-color: #00c6a2;
+}
+
+/* 필터 섹션 */
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.filters select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+/* 카드 리스트 */
+.card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card .card-info {
+    padding: 10px 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card .card-info h3 {
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.card .card-info p {
+    font-size: 14px;
+    margin: 0;
+    color: #666;
+}
+
+.card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+/* 알림 버튼 */
+.alert-button {
+    display: inline-block;
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 15px;
+    cursor: pointer;
+    text-align: right;
+}
+
+.alert-button:hover {
+    color: #666;
+}
+
+/* 추가 버튼 */
+.add-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #00c6a2;
+    color: white;
+    font-size: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.add-button:hover {
+    background-color: #009975;
+}
