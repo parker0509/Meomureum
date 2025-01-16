@@ -64,7 +64,8 @@ public class SecurityConfig {
 
 
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/swagger-ui/**").authenticated()
+                        .requestMatchers("/swagger-ui/**","/api/room/booking")
+                        .authenticated()
                         .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
                         .anyRequest().permitAll())
 

@@ -7,8 +7,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -46,11 +48,14 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
          SELECT r FROM Room r ORDER BY r.viewCount DESC
 
      */
-
-
-    @Query(value = "SELECT r FROM Room r WHERE r.created > CURRENT_DATE - INTERVAL 7 DAY", nativeQuery = true)
-    List<Room> findNewRooms();
-
+    // 7일 전 날짜를 기준으로 HOT 방들을 찾는 메서드
+    // 7일 전 날짜 이후로 생성된 방들 중 조회수(viewCount)가 높은 순으로 HOT 방을 찾는 메서드
     @Query("SELECT r FROM Room r ORDER BY r.viewCount DESC")
-    List<Room> findHotRooms(Pageable pageable);
+    List<Room> findHotRoom(Pageable pageable);
+
+
+    @Query("SELECT r FROM Room r ORDER BY r.created DESC")
+    List<Room> findNewRoom(@Param("sevenDaysAgo") LocalDateTime sevenDaysAgo, Pageable pageable);
+
+
 }

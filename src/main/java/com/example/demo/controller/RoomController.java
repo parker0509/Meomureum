@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,9 +39,6 @@ class RoomController {
     public List<Room> getRoomList() {
         return roomService.getAllRooms();  // List<Room>을 JSON 형태로 반환
     }
-
-
-
    /*  c@GetMapping
     @Operation(summary = "홈 페이지에서 방 목록 조회", description = " 홈 페이지 방 목록 조회")
     public String showRoomList(Model model) {
@@ -57,6 +55,7 @@ class RoomController {
     public String getRoomDetails(@PathVariable(name = "id") Long id, Model model) {
 
         Room room = roomService.getByRoomID(id);
+        roomService.viewRooms(id);
 
         model.addAttribute("room", room);
 
@@ -64,6 +63,26 @@ class RoomController {
 
 
     }
+
+    // 기능 추가 NEW , HOT
+    // NEW 기능 - 최신 룸 목록
+    // 'hot rooms'를 가져오는 API
+/*    @GetMapping("/hotroom")
+    public String getHotRooms(Pageable pageable,Model model) {
+        List<Room> hotRoom = roomService.findHotRooms(pageable);
+        System.out.println("Hot Rooms: " + hotRoom);  // 데이터 출력
+        model.addAttribute("hotRooms", hotRoom);
+        return "home";  // RoomService 메서드를 호출
+    }
+
+    // 예시: '새로운 방'을 가져오는 API
+    @GetMapping("/newroom")
+    public String getNewRooms(Pageable pageable,Model model) {
+        List<Room> rooms = roomService.findNewRooms(pageable);
+        model.addAttribute("rooms", rooms);  // "rooms"라는 이름으로 데이터를 전달
+        return "home";  // home.html로 반환
+    }*/
+
 
     @GetMapping("/search")
     public List<Room> searchRooms(@RequestParam(required = false) String addressName,
@@ -227,22 +246,9 @@ class RoomController {
 
 
 
-    // 기능 추가 NEW , HOT
-    // NEW 기능 - 최신 룸 목록
-    @GetMapping("/newrooms")
-    public String getNewRooms(Model model) {
-        List<Room> newRooms = roomService.getNewRooms();
-        model.addAttribute("rooms", newRooms);
-        return "newRooms"; // newRooms.html로 데이터를 전달
-    }
 
-    // HOT 기능 - 인기 룸 목록
-    @GetMapping("/hotrooms")
-    public String getHotRooms(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, Model model) {
-        List<Room> hotRooms = roomService.getHotRooms(page, size);
-        model.addAttribute("rooms", hotRooms);
-        return "hotRooms"; // hotRooms.html로 데이터를 전달
-    }
+
+
 
 
 }

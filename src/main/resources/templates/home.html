@@ -141,7 +141,7 @@
     <h5 class="new-rooms-subtitle">✨ 이런 방은 어떠세요? ✨</h5>
 
     <div class="room-container">
-        <div class="room-card" th:each="room : ${newrooms}">
+        <div class="room-card" th:each="room : ${newRooms}">
             <a th:href="@{/api/room/{id}(id=${room.id})}">
                 <div class="room-card-image">
                     <img th:src="@{${room.roomImageUri}}" alt="Room Image" class="img-fluid">
@@ -156,7 +156,24 @@
 </div>
 
 
-<div class="roomHot-container">
+<div class="container mt-5">
+    <h3 class="new-rooms-title"> 🔥지금 핫 한 조회수 많은 방들!!🔥</h3>
+    <h5 class="new-rooms-subtitle">어서 빨리 예약하세요 😁</h5>
+
+    <div class="room-container">
+        <div class="room-card" th:each="room : ${hotRooms}">
+            <a th:href="@{/api/room/{id}(id=${room.id})}">
+                <div class="room-card-image">
+                    <img th:src="@{${room.roomImageUri}}" alt="Room Image" class="img-fluid">
+                </div>
+                <div class="room-card-content">
+                    <h5 class="room-card-title" th:text="${room.roomName}">방 이름</h5>
+                    <p class="room-card-price" th:text="${room.rentalPrice}">가격</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
 
 
 </div>

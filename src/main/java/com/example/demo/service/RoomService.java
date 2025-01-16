@@ -14,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 
 import javax.swing.text.html.Option;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +24,7 @@ import java.util.Optional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -207,24 +210,34 @@ public class RoomService {
 
 
     // NEW, HOT 기능 추가 01 - 15 ⚡⚡
-    public List<Room> getNewRooms() {
-        return roomRepository.findNewRooms();
+
+
+    // 7일 전 날짜를 기준으로 'HOT' 방들을 가져오는 메서드
+    public List<Room> findHotRooms(Pageable pageable) {
+        // 7일 전 날짜 계산
+        return roomRepository.findHotRoom(pageable);  // RoomRepository 호출
     }
 
-
-    // NEW, HOT 기능 추가 01 - 15 ⚡⚡
-    public List<Room> getHotRooms(int page, int size) {
-        return roomRepository.findHotRooms(PageRequest.of(page, size));
+    // 7일 전 날짜를 기준으로 'NEW' 방들을 가져오는 메서드
+    public List<Room> findNewRooms(Pageable pageable) {
+        // 'NEW' 방들을 가져오는 쿼리 처리 (예: 7일 이내에 생성된 방)
+        LocalDateTime sevenDaysAgo = LocalDateTime.now().minus(7, ChronoUnit.DAYS);
+        return roomRepository.findNewRoom(sevenDaysAgo, pageable);  // RoomRepository 호출
     }
 
 
     // Room을 확인시 조회수 하나씩 상승
+    @Transactional
     public Room viewRooms(Long roomId) {
+
 
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new RuntimeException("Room not Found"));
 
+        // 확인용 로그 추가
+        System.out.println("현재 조회수: " + room.getViewCount());
         room.setViewCount(room.getViewCount() + 1);
+        System.out.println("업데이트 후 조회수  " + room.getViewCount());
         roomRepository.save(room);
 
         return room;
