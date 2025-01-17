@@ -52,8 +52,18 @@ public class User implements UserDetails {
         this.age = age != null ? age : "N/A";
     }
 
-    public User() {
+    @Builder
+    public User(String name, String email,String picture,String gender, String age) {
+        this.name = name;
+        this.email = email;
+        this.picture = picture;
+        this.gender = gender;
+        this.age = age;
     }
+
+    public User(){}
+
+
 
     public Long getId() {
         return id;
