@@ -1,6 +1,8 @@
 package com.example.demo.config;
 
 
+import com.example.demo.service.user.CustomOAuth2UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +16,13 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.SecurityFilterChain;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -22,10 +30,12 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private CustomOAuth2UserService customOAuth2UserService;
 
     @Autowired
-    private UserDetailsService userDetailsService;
-
+    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
+        this.customOAuth2UserService = customOAuth2UserService;
+    }
 
     // BCryptPasswordEncoder를 빈으로 등록
     @Bean
@@ -38,9 +48,8 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-
     @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         http
 
@@ -59,16 +68,19 @@ public class SecurityConfig {
                         .clearAuthentication(true)   // 인증 정보 삭제
                         .deleteCookies("JSESSIONID") // 세션 쿠키 삭제
                 )
-
+                .oauth2Login(oauth -> oauth
+                        .userInfoEndpoint(userInfo -> userInfo.userService(customOAuth2UserService))
+                        .successHandler((request, response, authentication) -> {
+                            response.sendRedirect("/HomePage"); // 로그인 후 홈 페이지로 리디렉션
+                        })
+                )
 
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/swagger-ui/**","/api/room/booking")
                         .authenticated()
                         .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
-                        .anyRequest().permitAll())
+                        .anyRequest().permitAll());
 
-
-                .httpBasic(withDefaults());
 
         return http.build();
     }

@@ -48,6 +48,33 @@
 </div>
 
 
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body text-center">
+            <h4 class="card-title mb-4">회원가입</h4>
+
+            <!-- 로그인 안 된 경우 -->
+            <div th:if="${userName == null}">
+                <p class="mb-4">join us</p>
+                <div class="d-flex justify-content-center">
+                    <!-- Google 로그인 버튼 -->
+                    <a th:href="@{/oauth2/authorization/google}" class="btn btn-outline-primary me-2" role="button">
+                        <i class="bi bi-google"></i> <span class="ms-2">Google </span>
+                    </a>
+                    <!-- Kakao 로그인 버튼 -->
+                    <a th:href="@{/oauth2/authorization/kakao}" class="btn btn-outline-warning me-2" role="button">
+                        <i class="bi bi-chat-dots"></i> <span class="ms-2">Kakao </span>
+                    </a>
+                    <!-- Naver 로그인 버튼 -->
+                    <a th:href="@{/oauth2/authorization/naver}" class="btn btn-outline-success me-2" role="button">
+                        <i class="bi bi-house-door"></i> <span class="ms-2">Naver </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="room-container">
         <div class="room-card" th:each="room : ${rooms}">

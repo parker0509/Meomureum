@@ -7,6 +7,7 @@ import com.example.demo.repository.UserRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -61,7 +62,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         httpSession.setAttribute("user",new SessionUser(user));
         return new DefaultOAuth2User(
-                Collections.emptySet(),
+                Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")),
                 oauth2Attribute.getAttributes(),
                 oauth2Attribute.getNameAttributeKey()
         );
@@ -72,14 +73,20 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         Optional<User> existOpt = userRepository.findByEmail(oauth2Attribute.getEmail());
 
-
         if (existOpt.isPresent()) {
             User existingUser = existOpt.get();
-            existingUser.update(existingUser.getName(), existingUser.getEmail());
-            return userRepository.save(existingUser);
+            String existingUserName = existingUser.getName();
+
+            // 기존 사용자의 이름이 null이거나, 다른 이름일 경우 업데이트 처리
+            if (existingUserName == null || !existingUserName.equals(oauth2Attribute.getName())) {
+                existingUser.update(oauth2Attribute.getName() != null ? oauth2Attribute.getName() : "Unknown", oauth2Attribute.getEmail());
+                return userRepository.save(existingUser);
+            }
+
+            return existingUser;
         } else {
+            // 새로운 사용자가 없으면 새로운 사용자 생성
             User newUser = oauth2Attribute.toEntity();
-            System.out.println("newUser = " + newUser);
             return userRepository.save(newUser);
         }
     }

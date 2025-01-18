@@ -17,14 +17,13 @@ public class OAuth2Attribute {
     private final String age;
 
     @Builder
-    public OAuth2Attribute(Map<String, Object> attributes, String nameAttributeKey,
-                           String name, String gender, String email, String age) {
+    public OAuth2Attribute(Map<String, Object> attributes, String nameAttributeKey, String name, String email, String gender, String age) {
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
         this.name = name;
-        this.gender = gender;
         this.email = email;
-        this.age = age;
+        this.gender = gender != null ? gender : "N/A";
+        this.age = age != null ? age : "N/A";
     }
 
 
@@ -37,11 +36,11 @@ public class OAuth2Attribute {
         }
         if ("kakao".equals(registrationId)) {
             System.out.println("Kakao Select" + registrationId);
-            return ofKakao(userNameAttributeName, attributes);
+            return ofKakao("kakao_account", attributes);
         }
         if ("naver".equals(registrationId)) {
             System.out.println("Naver Select" + registrationId);
-            return ofNaver(userNameAttributeName, attributes);
+            return ofNaver("id", attributes);
         }
 /*
             if ("facebook".equals(registrationId)) {
@@ -65,33 +64,44 @@ public class OAuth2Attribute {
                 .build();
     }
 
-    public static OAuth2Attribute ofNaver(String userNameAttributeName,
-                                          Map<String, Object> attributes) {
-
+    private static OAuth2Attribute ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
 
         return OAuth2Attribute.builder()
                 .name((String) response.get("name"))
-                .age((String) response.get("age"))
                 .email((String) response.get("email"))
                 .gender((String) response.get("gender"))
+                .age((String) response.get("age"))
                 .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }
+    private static OAuth2Attribute ofKakao(String userNameAttributeName, Map<String, Object> attributes) {
+        // 카카오 응답 데이터의 구조를 확인합니다.
+        System.out.println("Kakao attributes: " + attributes);
 
-    public static OAuth2Attribute ofKakao(String userNameAttributeName,
-                                          Map<String, Object> attributes) {
+        // 카카오 응답에서 kakao_account를 가져옵니다.
+        Object kakaoAccountObj = attributes.get("kakao_account");
 
-        Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
+        if (!(kakaoAccountObj instanceof Map)) {
+            throw new OAuth2AuthenticationException("Expected 'kakao_account' to be a Map, but got: " + kakaoAccountObj.getClass());
+        }
 
+        Map<String, Object> kakaoAccount = (Map<String, Object>) kakaoAccountObj;
+
+        // 이메일과 프로필 정보를 안전하게 추출
+        String email = kakaoAccount != null ? (String) kakaoAccount.get("email") : null;
+
+        // 카카오 프로필 정보에서 nickname 추출
+        Map<String, Object> profile = (Map<String, Object>) kakaoAccount.get("profile");
+        String nickname  = profile != null ? (String) profile.get("nickname") : null;
+
+        // OAuthAttributes 객체 생성 후 반환
         return OAuth2Attribute.builder()
-                .name((String) kakaoAccount.get("name"))
-                .age((String) kakaoAccount.get("nickname"))
-                .email((String) kakaoAccount.get("email"))
-                .gender((String) kakaoAccount.get("gender"))
-                .attributes(kakaoAccount)
+                .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
+                .email(email)
+                .name(nickname)  // nickname을 이름으로 설정
                 .build();
     }
 

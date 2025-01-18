@@ -45,6 +45,11 @@ public class User implements UserDetails {
 
     // 사용자 정보 업데이트 메서드 추가
     public void update(String name, String email) {
+
+        if (name == null) {
+            name = "Unknown";  // 이름이 없으면 기본값으로 설정
+        }
+
         this.name = name;
         this.email = email;
         this.picture = picture != null ? picture : "N/A";
