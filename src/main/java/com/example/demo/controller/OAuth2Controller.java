@@ -88,7 +88,7 @@ public class OAuth2Controller {
             model.addAttribute("userName", userName);
         }
 
-        return "HomePage";  // HomePage.html 템플릿 반환
+        return "deal-room";  // HomePage.html 템플릿 반환
     }
 
 }

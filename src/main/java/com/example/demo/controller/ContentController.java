@@ -2,13 +2,17 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Contents;
 import com.example.demo.service.ContentService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/api/contents")
@@ -16,20 +20,46 @@ public class ContentController {
 
 
     private final ContentService contentService;
+    private final HttpSession httpSession;
 
-    @Autowired
-    public ContentController(ContentService contentService) {
+    public ContentController(ContentService contentService, HttpSession httpSession) {
         this.contentService = contentService;
+        this.httpSession = httpSession;
     }
 
     @GetMapping
-    public String getByContents(Model model){
+    public String getByContents(@AuthenticationPrincipal OAuth2User oAuth2User,Model model){
 
         List<Contents> contents = contentService.getAllContents();
         if (contents == null) {
             contents = new ArrayList<>();  // 빈 리스트로 처리
         }
         model.addAttribute("content", contents);
+
+
+        // OAUTH
+
+        if (oAuth2User != null) {
+            // OAuth2User에서 사용자 이름 추출
+            String userName = (String) oAuth2User.getAttributes().get("name");
+
+            // name이 없다면 properties에서 nickname을 가져오는 로직 추가
+            if (userName == null) {
+                Map<String, Object> properties = (Map<String, Object>) oAuth2User.getAttributes().get("properties");
+                if (properties != null) {
+                    userName = (String) properties.get("nickname");
+                }
+            }
+
+            // 디버깅: 사용자 정보 출력
+            System.out.println("OAuth2User attributes: " + oAuth2User.getAttributes());
+            System.out.println("UserName: " + userName);
+
+            // 세션에 사용자 이름 저장
+            httpSession.setAttribute("username", userName);
+            // 모델에 userName 추가
+            model.addAttribute("username", userName);
+        }
         return "content-list";
     }
 
@@ -51,6 +81,8 @@ public class ContentController {
 
 
     }
+
+
 
 
 

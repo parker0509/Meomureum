@@ -71,7 +71,7 @@ public class SecurityConfig {
                 .oauth2Login(oauth -> oauth
                         .userInfoEndpoint(userInfo -> userInfo.userService(customOAuth2UserService))
                         .successHandler((request, response, authentication) -> {
-                            response.sendRedirect("/HomePage"); // 로그인 후 홈 페이지로 리디렉션
+                            response.sendRedirect("/"); // 로그인 후 홈 페이지로 리디렉션
                         })
                 )
 

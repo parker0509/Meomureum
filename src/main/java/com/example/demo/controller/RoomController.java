@@ -6,16 +6,20 @@ import com.example.demo.repository.RoomRepository;
 import com.example.demo.service.RoomService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 
@@ -26,11 +30,12 @@ class RoomController {
 
     private final RoomService roomService;
     private final RoomRepository roomRepository;
+    private final HttpSession httpSession;
 
-    @Autowired
-    public RoomController(RoomService roomService, RoomRepository roomRepository) {
+    public RoomController(RoomService roomService, RoomRepository roomRepository, HttpSession httpSession) {
         this.roomService = roomService;
         this.roomRepository = roomRepository;
+        this.httpSession = httpSession;
     }
 
     @GetMapping
@@ -226,13 +231,6 @@ class RoomController {
         model.addAttribute("rooms", rooms);
         return "apt-room";
     }
-
-    @GetMapping("/deal")
-    public String getDeal(Model model) {
-
-        return "deal-room";
-    }
-
 
     @GetMapping("/discount")
     public String getDiscount() {
