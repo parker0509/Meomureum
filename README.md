@@ -121,8 +121,8 @@ cd meomureum
 
 
 ---
-📸 스크린샷
-메인 페이지
+## 📸 스크린샷
+# 메인 페이지
 
 <img src="https://github.com/user-attachments/assets/616e4e96-6290-4ff4-abcb-691bb7cdb124" width="200" height="100"/>
 <img src="https://github.com/user-attachments/assets/e4cd9e4f-486a-4062-a4d8-1e48e6244df8" width="200" height="100"/>
@@ -133,7 +133,7 @@ cd meomureum
 ---
 
 
-시스템 아키텍쳐
+## 🚀 설치 및 실행 방법
 
 ![qw](https://github.com/user-attachments/assets/435a40be-4875-4f07-aadc-c268de83c947)
 
