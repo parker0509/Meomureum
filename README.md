@@ -6,7 +6,59 @@
 ---
 
 ## 🛠️ 프로젝트 구조
-demo ├── config │ ├── AppConfig.java │ ├── SecurityConfig.java │ └── SwaggerConfig.java ├── controller │ ├── ConsultController.java │ ├── ContentController.java │ ├── HomeController.java │ ├── KakaoApiController.java │ ├── LoginController.java │ ├── OAuth2Controller.java │ ├── RoomApiController.java │ └── UserController.java ├── dto │ ├── OAuth2Attribute.java │ ├── RoomRequest.java │ └── SessionUser.java ├── entity │ ├── Address.java │ ├── Contents.java │ ├── Role.java │ ├── Room.java │ └── User.java ├── repository │ ├── AddressRepository.java │ └── ContentsRepository.java ├── service │ ├── CustomOAuth2UserService.java │ ├── CustomUserDetailsService.java │ ├── UserService.java │ ├── ContentService.java │ ├── KakaoApiService.java │ ├── LoginService.java │ └── RoomService.java ├── resources │ ├── static │ │ ├── css │ │ │ ├── content/styles.css │ │ │ └── home/styles.css │ │ └── images │ │ ├── home-instr2.png │ │ └── home-instr3.png │ └── templates │ ├── apt-room.html │ ├── coliving-room.html │ ├── consult.html │ ├── content-form.html │ ├── content-list.html │ ├── deal-room.html │ └── discount-room.html
+
+demo 
+├── config 
+│ ├── AppConfig.java 
+│ ├── SecurityConfig.java
+│ └── SwaggerConfig.java 
+├── controller 
+│ ├── ConsultController.java 
+│ ├── ContentController.java 
+│ ├── HomeController.java 
+│ ├── KakaoApiController.java 
+│ ├── LoginController.java 
+│ ├── OAuth2Controller.java 
+│ ├── RoomApiController.java 
+│ └── UserController.java 
+├── dto 
+│ ├── OAuth2Attribute.java 
+│ ├── RoomRequest.java 
+│ └── SessionUser.java 
+├── entity 
+│ ├── Address.java 
+│ ├── Contents.java 
+│ ├── Role.java 
+│ ├── Room.java 
+│ └── User.java 
+├── repository 
+│ ├── AddressRepository.java 
+│ └── ContentsRepository.java 
+├── service 
+│ ├── CustomOAuth2UserService.java 
+│ ├── CustomUserDetailsService.java 
+│ ├── UserService.java 
+│ ├── ContentService.java 
+│ ├── KakaoApiService.java 
+│ ├── LoginService.java 
+│ └── RoomService.java 
+├── resources 
+│ ├── static 
+│ │ ├── css 
+│ │ │ ├── content/styles.css 
+│ │ │ └── home/styles.css 
+│ │ └── images 
+│ │ ├── home-instr2.png 
+│ │ └── home-instr3.png 
+│ └── templates 
+│ ├── apt-room.html 
+│ ├── coliving-room.html 
+│ ├── consult.html
+│ ├── content-form.html 
+│ ├── content-list.html 
+│ ├── deal-room.html 
+│ └── discount-room.html
+
 ---
 
 ## ✨ 주요 기능
