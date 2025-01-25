@@ -81,7 +81,7 @@ demo
 
 ### 🛠️ 기술 스택
 - **백엔드**: Spring Boot, Spring Security, JPA
-- **프론트엔드**: Thymeleaf, HTML5, CSS3
+- **프론트엔드**: Thymeleaf, HTML5, CSS3 , Javascript
 - **데이터베이스**: MySQL
 - **외부 API**: Kakao API, OAuth 2.0
 
