@@ -43,3 +43,13 @@ yaml
 ```bash
 git clone https://github.com/username/meomureum.git
 cd meomureum
+
+
+
+
+📂 API 설계
+메서드	URL	설명	인증 필요
+GET	/rooms	방 목록 조회	❌
+GET	/rooms/{id}	특정 방 상세 조회	❌
+POST	/rooms	방 등록	✅
+POST	/login/oauth2/code	OAuth 2.0 로그인 처리	❌
