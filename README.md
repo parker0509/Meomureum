@@ -133,7 +133,7 @@ cd meomureum
 ---
 
 
-## 🚀 설치 및 실행 방법
+## 🚀 시스템 아키텍처
 
 ![qw](https://github.com/user-attachments/assets/435a40be-4875-4f07-aadc-c268de83c947)
 
