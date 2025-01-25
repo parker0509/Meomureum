@@ -45,22 +45,7 @@ demo
 │ ├── KakaoApiService.java 
 │ ├── LoginService.java 
 │ └── RoomService.java 
-├── resources 
-│ ├── static 
-│ │ ├── css 
-│ │ │ ├── content/styles.css 
-│ │ │ └── home/styles.css 
-│ │ └── images 
-│ │ ├── home-instr2.png 
-│ │ └── home-instr3.png 
-│ └── templates 
-│ ├── apt-room.html 
-│ ├── coliving-room.html 
-│ ├── consult.html
-│ ├── content-form.html 
-│ ├── content-list.html 
-│ ├── deal-room.html 
-│ └── discount-room.html
+
 </pre>
 
 ---
