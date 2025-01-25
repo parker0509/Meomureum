@@ -91,7 +91,7 @@ demo
 
 ### 1. 프로젝트 클론
 ```bash
-git clone https://github.com/username/meomureum.git
+git clone https://github.com/parker0509/meomureum.git
 cd meomureum
 ```
 ----
