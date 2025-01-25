@@ -139,9 +139,9 @@ cd meomureum
 📸 스크린샷
 메인 페이지
 
-<img src="https://github.com/user-attachments/assets/616e4e96-6290-4ff4-abcb-691bb7cdb124" width="100" height="200"/>
-<img src="https://github.com/user-attachments/assets/e4cd9e4f-486a-4062-a4d8-1e48e6244df8" width="100" height="200"/>
-<img src="https://github.com/user-attachments/assets/0d26cbb7-4abd-4ff4-ae27-ccfa1f2a5c5a" width="100" height="200"/>
+<img src="https://github.com/user-attachments/assets/616e4e96-6290-4ff4-abcb-691bb7cdb124" width="200" height="100"/>
+<img src="https://github.com/user-attachments/assets/e4cd9e4f-486a-4062-a4d8-1e48e6244df8" width="200" height="100"/>
+<img src="https://github.com/user-attachments/assets/0d26cbb7-4abd-4ff4-ae27-ccfa1f2a5c5a" width="200" height="100"/>
 
 
 
