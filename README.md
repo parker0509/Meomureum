@@ -58,6 +58,7 @@ demo
 │ ├── content-list.html 
 │ ├── deal-room.html 
 │ └── discount-room.html
+</pre>
 
 ---
 
