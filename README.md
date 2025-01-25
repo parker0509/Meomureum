@@ -6,7 +6,7 @@
 ---
 
 ## 🛠️ 프로젝트 구조
-
+<pre>
 demo 
 ├── config 
 │ ├── AppConfig.java 
