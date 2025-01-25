@@ -3,18 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Property</title>
+    <title>Write Post</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<h1>Add New Property</h1>
-<form th:action="@{/api/contents/new}" th:object="${content}" method="post">
-    <input type="text" th:field="*{title}" placeholder="제목" />
-    <input type="text" th:field="*{location}" placeholder="위치" />
-    <input type="text" th:field="*{username}" placeholder="닉네임" />
-    <input type="text" th:field="*{description}" placeholder="설명" />
+<div class="container">
+    <h1>Write a New Post</h1>
+    <form th:action="@{/api/contents/new}" method="post">
+        <div>
+            <label for="title">제목:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div>
+            <label for="description">설명:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
 
-
-    <button type="submit">Submit</button>
-</form>
+        <div>
+            <label for="location">위치 : </label>
+            <input type ="text" id="location" name="loaction" required>
+        </div>
+        <div>
+            <button type="submit">저장하기</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

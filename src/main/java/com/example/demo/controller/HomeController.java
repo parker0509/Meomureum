@@ -56,7 +56,7 @@ public class HomeController {
 
             // 디버깅: 사용자 정보 출력
             System.out.println("OAuth2User attributes: " + oAuth2User.getAttributes());
-            System.out.println("UserName: " + userName);
+            System.out.println("UserName1: " + userName);
 
             // 세션에 사용자 이름 저장
             httpSession.setAttribute("username", userName);
@@ -72,7 +72,7 @@ public class HomeController {
 
             // 디버깅: 사용자 정보 출력
             System.out.println("User: " + user);
-            System.out.println("UserName: " + userName);
+            System.out.println("UserName2: " + userName);
 
             // 세션에 사용자 이름 저장
             httpSession.setAttribute("username", userName);

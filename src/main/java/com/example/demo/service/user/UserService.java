@@ -59,4 +59,5 @@ public class UserService {
             throw new RuntimeException("유저를 찾기 못했습니다.");
         }
     }
+
 }

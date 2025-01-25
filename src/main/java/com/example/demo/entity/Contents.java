@@ -23,6 +23,15 @@ public class Contents {
     @JoinColumn(name = "user_id")
     private User user;
 
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     private LocalDateTime createdAt = LocalDateTime.now();
 
 
@@ -74,13 +83,6 @@ public class Contents {
         this.description = description;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
