@@ -53,3 +53,16 @@ GET	/rooms	방 목록 조회	❌
 GET	/rooms/{id}	특정 방 상세 조회	❌
 POST	/rooms	방 등록	✅
 POST	/login/oauth2/code	OAuth 2.0 로그인 처리	❌
+
+
+
+
+📸 스크린샷
+메인 페이지
+
+🧑‍💻 기여 방법
+이 프로젝트를 포크합니다.
+새로운 브랜치를 생성합니다. (feature/새로운기능)
+변경 사항을 커밋합니다. (git commit -m "Add 새로운 기능")
+푸시 후 Pull Request를 생성합니다.
+
