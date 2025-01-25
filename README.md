@@ -19,6 +19,9 @@
 
 <img src = "https://github.com/user-attachments/assets/3c330dbb-e656-4167-af1f-2d21ea56095c" width="300" height="200"/>
 
+<img src = "https://github.com/user-attachments/assets/6fc71361-7f84-45a3-8001-eb3efe12d4cb" width="300" height ="200"/>
+
+
 
 
 ## 🛠️ 프로젝트 구조
