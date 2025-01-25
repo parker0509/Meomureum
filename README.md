@@ -57,9 +57,11 @@ cd meomureum
 | `POST`   | `/rooms`             | 방 등록           | ✅        |
 | `POST`   | `/login/oauth2/code` | OAuth 2.0 로그인 처리 | ❌        |
 
+---
 📸 스크린샷
 메인 페이지
 
+---
 🧑‍💻 기여 방법
 이 프로젝트를 포크합니다.
 새로운 브랜치를 생성합니다. (feature/새로운기능)
