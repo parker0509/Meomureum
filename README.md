@@ -139,7 +139,7 @@ cd meomureum
 ---
 📸 스크린샷
 메인 페이지
-![image](https://github.com/user-attachments/assets/616e4e96-6290-4ff4-abcb-691bb7cdb124)
+<img src="https://github.com/user-attachments/assets/616e4e96-6290-4ff4-abcb-691bb7cdb124" width="500"/>
 
 ---
 🧑‍💻 기여 방법
