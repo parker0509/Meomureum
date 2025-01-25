@@ -133,3 +133,8 @@ cd meomureum
 ---
 
 
+시스템 아키텍쳐
+
+![qw](https://github.com/user-attachments/assets/435a40be-4875-4f07-aadc-c268de83c947)
+
+
