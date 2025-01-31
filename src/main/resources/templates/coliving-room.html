@@ -54,7 +54,7 @@
                 </div>
                 <div class="room-card-content">
                     <h5 class="room-card-title" th:text="${room.roomName}">방 이름</h5>
-                    <p class="room-card-price" th:text="${room.rentalPrice}">가격</p>
+                    <p class="room-card-price" th:text="|${#numbers.formatInteger(room.rentalPrice, 3 , 'COMMA')}|+원">가격</p>
                 </div>
             </a>
         </div>

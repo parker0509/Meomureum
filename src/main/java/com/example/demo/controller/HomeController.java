@@ -14,15 +14,12 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Controller
-
-@Tag(name = "Home", description = "연방 홈 페이지 관련 API")
+@Tag(name = "Home", description = "머무름 홈 페이지 관련 API")
 public class HomeController {
 
     private final UserService userService;
@@ -36,17 +33,19 @@ public class HomeController {
         this.httpSession = httpSession;
     }
 
+    @Operation(
+            summary = "방 목록 조회",
+            description = "홈 페이지에 모든 방 목록을 조회하고, 최신 방과 인기 방을 가져옵니다. 사용자 로그인 상태에 따라 세션에 사용자 이름을 저장하고 모델에 전달합니다."
+    )
     @GetMapping("/")
-    @Operation(summary = "방 목록 조회", description = "방 목록 모든 조회 페이지")
-    public String getHomeRooms(Model model, @AuthenticationPrincipal OAuth2User oAuth2User,
-                               @AuthenticationPrincipal User user, Pageable pageable) {
+    public String getHomeRooms(Model model,
+                               @AuthenticationPrincipal OAuth2User oAuth2User,
+                               @AuthenticationPrincipal User user,
+                               Pageable pageable) {
 
         // OAuth2 사용자 로그인 처리
         if (oAuth2User != null) {
-            // OAuth2User에서 사용자 이름 추출
             String userName = (String) oAuth2User.getAttributes().get("name");
-
-            // name이 없다면 properties에서 nickname을 가져오는 로직 추가
             if (userName == null) {
                 Map<String, Object> properties = (Map<String, Object>) oAuth2User.getAttributes().get("properties");
                 if (properties != null) {
@@ -54,92 +53,35 @@ public class HomeController {
                 }
             }
 
-            // 디버깅: 사용자 정보 출력
-            System.out.println("OAuth2User attributes: " + oAuth2User.getAttributes());
-            System.out.println("UserName1: " + userName);
-
             // 세션에 사용자 이름 저장
             httpSession.setAttribute("username", userName);
-
-            // 모델에 userName 추가
             model.addAttribute("username", userName);
-
         }
         // 일반 사용자 로그인 처리
         else if (user != null) {
-            // 일반 사용자에서 사용자 이름 추출
             String userName = user.getUsername();
-
-            // 디버깅: 사용자 정보 출력
-            System.out.println("User: " + user);
-            System.out.println("UserName2: " + userName);
-
-            // 세션에 사용자 이름 저장
             httpSession.setAttribute("username", userName);
-
-            // 모델에 userName 추가
             model.addAttribute("username", userName);
         }
 
-
-        // 모든 방 목록
+        // 모든 방 목록 조회
         List<Room> room = roomService.getAllRooms();
         model.addAttribute("rooms", room);
 
-/*
-
-               01-16
-
-               NEW/HOT 기능 추가
-
-               주석 처리
-
-
-   // 최신 방을 가장 위에 띄우고, 그 외의 방들을 내림차순으로 가져오기
-        List<Room> newrooms = roomService.getLatestRooms();
-        // 최신 3개 방만 가져오기
-        if (newrooms.size() > 3) {
-            newrooms = newrooms.subList(0, 3); // 첫 3개 방만 가져오기
-        }
-        model.addAttribute("newrooms", newrooms);
-
-        // 최신 4개 방을 제외한 나머지 방들
-        List<Room> otherRooms = roomService.getRemainingRooms(); // getRemainingRooms 메소드에서 나머지 방들을 리턴
-        model.addAttribute("otherRooms", otherRooms);*/
-
-
-        /*
-
-      기능 추가 NEW , HOT
-      NEW 기능 - 최신 룸 목록
-       hot rooms를 가져오는 API
-
-        */
-
+        // 최신 방 목록 (최대 3개)
         List<Room> hotRoom = roomService.findHotRooms(pageable);
-        System.out.println("Hot Rooms: " + hotRoom);  // 데이터 출력
-
-        if(hotRoom.size()>3){
-            hotRoom = hotRoom.subList(0,3);
+        if (hotRoom.size() > 3) {
+            hotRoom = hotRoom.subList(0, 3);
         }
         model.addAttribute("hotRooms", hotRoom);
 
+        // 최신 방 목록 (최대 3개)
         List<Room> newRoom = roomService.findNewRooms(pageable);
-
         if (newRoom.size() > 3) {
-            newRoom = newRoom.subList(0,3);
+            newRoom = newRoom.subList(0, 3);
         }
-        System.out.println("New Rooms: " + newRoom);  // 데이터 출력
         model.addAttribute("newRooms", newRoom);
 
         return "home";
     }
-
-
-
-
-
-
-
-
 }

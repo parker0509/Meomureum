@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-
 import com.example.demo.service.user.CustomOAuth2UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -20,8 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
 
-
-@Tag(name="OAuth",description = "OAuth 로그인 ")
+@Tag(name="OAuth", description = "OAuth 로그인 관련 API")
 @Controller
 public class OAuth2Controller {
 
@@ -34,7 +32,7 @@ public class OAuth2Controller {
         this.customOAuth2UserService = customOAuth2UserService;
     }
 
-
+    @Operation(summary = "OAuth2 로그인 페이지", description = "OAuth2 로그인 후 사용자 정보를 화면에 표시합니다.")
     @GetMapping("/testOAuth2")
     public String login(@AuthenticationPrincipal OAuth2User oAuth2User, Model model) {
         if (oAuth2User != null) {
@@ -45,7 +43,7 @@ public class OAuth2Controller {
             httpSession.setAttribute("userName", userName);  // 세션에 사용자 이름 저장
             model.addAttribute("userName", userName);  // 모델에 userName 추가
         }
-        return "testOAuth2";  // "HomePage.html" 템플릿을 반환
+        return "testOAuth2";  // "testOAuth2.html" 템플릿을 반환
     }
 
     @Operation(summary = "OAuth2 로그인", description = "OAuth2 로그인 후 사용자 정보를 반환합니다.")
@@ -63,7 +61,7 @@ public class OAuth2Controller {
         return customOAuth2UserService.loadUser(userRequest);
     }
 
-
+    @Operation(summary = "HomePage로 이동", description = "OAuth2 로그인 후 HomePage로 이동하여 사용자 정보를 표시합니다.")
     @GetMapping("/HomePage")
     public String HomePage(@AuthenticationPrincipal OAuth2User oAuth2User, Model model) {
         if (oAuth2User != null) {
@@ -88,8 +86,6 @@ public class OAuth2Controller {
             model.addAttribute("userName", userName);
         }
 
-        return "deal-room";  // HomePage.html 템플릿 반환
+        return "deal-room";  // "deal-room.html" 템플릿 반환
     }
-
 }
-
