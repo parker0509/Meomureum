@@ -146,3 +146,194 @@ body {
 .add-button:hover {
     background-color: #009975;
 }
+
+a {
+    text-decoration: none;
+}
+
+/*
+코멘트부분
+*/
+
+/* 댓글 섹션 */
+.comments-section {
+    margin-top: 40px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.comments-section h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.comment {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.comment p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.comment .comment-author {
+    font-size: 12px;
+    color: #777;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.comment-form {
+    margin-top: 30px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.comment-form input[type="text"],
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.comment-form button {
+    background-color: #00c6a2;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.comment-form button:hover {
+    background-color: #009975;
+}
+
+/* 헤더 섹션 */
+.content-detail-container {
+    margin-bottom: 30px;
+}
+
+.content-detail h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.content-detail p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.content-detail div {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #444;
+}
+
+
+/* 폼 섹션 */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 각 입력 필드 스타일 */
+form div {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+input[type="text"],
+textarea {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f7f7f7;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+/* 입력 필드 Focus 효과 */
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #00bcd4;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
+}
+
+/* textarea에 스크롤 설정 */
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+ .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.5rem; /* 상하 간격과 좌우 간격 조정 */
+            background-color: #fff;
+            color: black;
+            position: relative; /* 위치 조정 가능하게 설정 */
+            top: -40px; /* 상단에 더 붙이기 */
+        }
+
+        .navbar .brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .navbar .menu a {
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            color: black;
+            background-color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar .menu a:hover {
+            background-color: #004494;
+        }
+
+        .navbar .menu .username {
+            font-weight: bold;
+            background-color: transparent;
+            color: #000000;
+            pointer-events: none;
+        }
+        .header {
+            text-align: center;
+            margin: 30px;
+        }
+
+

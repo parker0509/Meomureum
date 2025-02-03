@@ -3,54 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>직거래 - 방있음</title>
+    <title>머무름</title>
     <link rel="stylesheet" href="/css/content/styles.css">
 </head>
 <body>
 <div class="container">
     <!-- 헤더 -->
-    <div class="header">
-        <!-- 로그인된 사용자만 환영 메시지와 로그아웃 버튼을 표시 -->
-        <div th:if="${username != null}">
-            <div class="container">
-                <div class="welcome-message">
-                    <p>환영합니다, <span th:text="${username}"></span>님!</p>
+
+    <div class="container">
+        <header class="header">
+            <nav class="navbar">
+                <div class="brand">머무름</div>
+                <div class="menu">
+                    <!-- 로그인한 경우 -->
+                    <span class="username" th:if="${username != null}" th:text="${username} + ' 님'">User</span>
+
+                    <!-- 로그인하지 않은 경우 로그인/회원가입 버튼 표시 -->
+                    <a href="/api/login" th:if="${username == null}">회원가입/로그인</a>
+
+                    <!-- 로그인한 경우 로그아웃 버튼 표시 -->
+                    <a href="/logout" th:if="${username != null}">로그아웃</a>
                 </div>
-
-                <!-- 로그아웃 버튼 -->
-                <a href="/logout" class="logout-btn">로그아웃</a>
-            </div>
-        </div>
-
-        <h1>어떤 직거래를 할까요?</h1>
-        <div class="tabs">
-            <a href="index.html" class="active">방있음</a>
-            <a href="want-room.html">방구함</a>
-        </div>
-    </div>
-
-    <!-- 필터 -->
-    <div class="filters">
-        <select>
-            <option>서울</option>
-            <option>전체</option>
-        </select>
-        <select>
-            <option>매물유형</option>
-        </select>
+            </nav>
+        </header>
+        <h1>어떤 정보를 공유해볼까요?</h1>
     </div>
 
     <!-- 내용 리스트 -->
     <div class="content-list">
         <div th:each="content : ${content}">
-            <div class="content-card">
+            <a th:href="@{'contents/content-detail/' + ${content.id}}" class="content-card">
                 <h3 th:text="${content.title}">타이틀</h3>
-                <p th:text="${content.description}">설명</p></div>
+                <p th:text="${content.description}">설명</p>
+            </a>
         </div>
     </div>
 
-    <!-- 알림 버튼 -->
-    <div class="alert-button">알림받기 0</div>
 
     <!-- 추가 버튼 -->
     <a href="/api/contents/content-form">
@@ -59,41 +47,41 @@
 
 </div>
 <script>
-<!--    const addButton = document.querySelector('.add-button');
-    const popup = document.querySelector('#popup');
-    const closePopup = document.querySelector('#closePopup');
-    const toggleTrigger = document.getElementById('toggleTrigger');
-    const alternateOptions = document.getElementById('alternateOptions');
+    <!--    const addButton = document.querySelector('.add-button');
+        const popup = document.querySelector('#popup');
+        const closePopup = document.querySelector('#closePopup');
+        const toggleTrigger = document.getElementById('toggleTrigger');
+        const alternateOptions = document.getElementById('alternateOptions');
 
-    // 팝업 열기와 자동 로그인 여부 확인
-    addButton.addEventListener('click', function (e) {
-        e.preventDefault();
-            popup.style.display = "block"; // 로그인 팝업 표시
+        // 팝업 열기와 자동 로그인 여부 확인
+        addButton.addEventListener('click', function (e) {
+            e.preventDefault();
+                popup.style.display = "block"; // 로그인 팝업 표시
 
-     });
+         });
 
-    // 팝업 닫기
-    closePopup.addEventListener('click', function () {
-        popup.style.display = "none";
-    });
-
-    // 팝업 바깥 클릭 시 닫기
-    document.addEventListener('click', function (event) {
-        if (!popup.contains(event.target) && !addButton.contains(event.target)) {
+        // 팝업 닫기
+        closePopup.addEventListener('click', function () {
             popup.style.display = "none";
-        }
-    });
+        });
 
-    // "다른 방법으로 시작하기" 토글
-    toggleTrigger.addEventListener('click', () => {
-        if (alternateOptions.style.display === 'none' || alternateOptions.style.display === '') {
-            alternateOptions.style.display = 'block';
-            toggleTrigger.textContent = '다른 방법으로 시작하기 ▲';
-        } else {
-            alternateOptions.style.display = 'none';
-            toggleTrigger.textContent = '다른 방법으로 시작하기 ▼';
-        }
-    });-->
+        // 팝업 바깥 클릭 시 닫기
+        document.addEventListener('click', function (event) {
+            if (!popup.contains(event.target) && !addButton.contains(event.target)) {
+                popup.style.display = "none";
+            }
+        });
+
+        // "다른 방법으로 시작하기" 토글
+        toggleTrigger.addEventListener('click', () => {
+            if (alternateOptions.style.display === 'none' || alternateOptions.style.display === '') {
+                alternateOptions.style.display = 'block';
+                toggleTrigger.textContent = '다른 방법으로 시작하기 ▲';
+            } else {
+                alternateOptions.style.display = 'none';
+                toggleTrigger.textContent = '다른 방법으로 시작하기 ▼';
+            }
+        });-->
 </script>
 </body>
 </html>

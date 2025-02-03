@@ -16,6 +16,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -71,8 +72,7 @@ public class ContentController {
 
             httpSession.setAttribute("username", userName);
             model.addAttribute("username", userName);
-        }
-        else if (user != null) {
+        } else if (user != null) {
             String userName = user.getUsername();
 
             httpSession.setAttribute("username", userName);
@@ -100,7 +100,15 @@ public class ContentController {
             }
     )
     @PostMapping("/new")
-    public String SetSaveByContents(@ModelAttribute Contents contents) {
+    public String SetSaveByContents(@ModelAttribute Contents contents, @AuthenticationPrincipal org.springframework.security.core.userdetails.User securityUser) {
+
+        String username = securityUser.getUsername();
+
+        com.example.demo.entity.User user = userService.findByUsername(username);
+        System.out.println("user = " + user);
+
+        contents.setUser(user);
+
         contentService.saveContents(contents);
         return "redirect:/api/contents";
     }
@@ -113,4 +121,18 @@ public class ContentController {
     public String writePage() {
         return "content-form";
     }
+
+    @GetMapping("/content-detail/{id}")
+    public String getContentDetail(@PathVariable(name = "id") Long id,
+                                   Model model) {
+        Optional<Contents> contents = contentService.findById(id);
+
+        if (contents.isPresent()) {
+            model.addAttribute("content", contents.get());
+            return "content-detail"; // content-detail.html을 반환
+        } else {
+            return "error"; // 콘텐츠가 없으면 error.html 페이지로 리다이렉트
+        }
+    }
+
 }

@@ -4,6 +4,7 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Contents {
@@ -13,7 +14,7 @@ public class Contents {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+
     private String title;
     private String content;
     private String location;
@@ -23,6 +24,23 @@ public class Contents {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany(mappedBy = "contents", cascade = CascadeType.ALL)
+    private List<Comment> comments; // 게시물에 달린 댓글들
+
+
+    // 댓글을 추가하는 메서드
+    public void addComment(Comment comment) {
+        comments.add(comment);
+        comment.setContents(this);
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public User getUser() {
         return user;
@@ -43,13 +61,6 @@ public class Contents {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getTitle() {
         return title;

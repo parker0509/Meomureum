@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContentService {
@@ -25,6 +26,13 @@ public class ContentService {
     // 조회
     public List<Contents> getAllContents() {
         return contentsRepository.findAll();
+    }
+
+
+    //
+    public Optional<Contents> findById(Long id){
+
+        return contentsRepository.findById(id);
     }
 
     // 저장
