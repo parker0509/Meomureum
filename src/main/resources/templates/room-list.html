@@ -3,48 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>방 목록</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        img {
-            max-width: 100px;
-            max-height: 100px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/home/style.css">
+
+    <title>머무름 방 목록</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // 검색어 입력 시마다 AJAX 요청 보내기
+            $('#searchInput').on('input', function() {
+                var searchQuery = $(this).val(); // 검색어 가져오기
+
+                $.ajax({
+                    url: '/api/rooms/search', // 검색을 처리하는 서버 URL
+                    type: 'GET',
+                    data: { search: searchQuery }, // 입력된 검색어 전송
+                    success: function(data) {
+                        // 검색 결과가 성공적으로 반환되면, 방 목록을 업데이트
+                        updateRoomList(data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching rooms: " + error);
+                    }
+                });
+            });
+
+            // 방 목록 업데이트
+            function updateRoomList(rooms) {
+                var roomListHtml = '';
+                rooms.forEach(function(room) {
+                    roomListHtml += `
+                        <div class="col-md-4">
+                            <div class="room-card">
+                                <a href="/api/room/${room.id}">
+                                    <div class="room-card-image">
+                                        <img src="${room.roomImageUri}" alt="Room Image" class="img-fluid">
+                                    </div>
+                                    <div class="room-card-body">
+                                        <h5 class="room-card-title">${room.roomName}</h5>
+                                        <p class="room-card-price">${room.rentalPrice}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                });
+                // 새로운 HTML로 방 목록을 덮어쓰기
+                $('.row').html(roomListHtml);
+            }
+        });
+    </script>
+
 </head>
 <body>
 
-<h1>방 목록</h1>
+<div class="container mt-5">
+    <h3 class="new-rooms-title text-center">방 목록</h3>
 
-<table>
-    <thead>
-    <tr>
-        <th>방 이름</th>
-        <th>주소</th>
-        <th>임대료</th>
-        <th>사진</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="room : ${newroom}">
-        <td th:text="${room.roomName}"></td>
-        <td th:text="${room.rentalPrice}"></td>
-        <!-- 이미지 추가 -->
-        <td><img th:src="${room.roomImageUri}" alt="Room Image"></td>
-    </tr>
-    </tbody>
-</table>
+    <!-- 검색 바 -->
+    <form class="form-inline mb-4">
+        <div class="form-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="지역, 지하철, 대학교 검색">
+        </div>
+    </form>
+
+    <!-- 방 목록 -->
+    <div class="row">
+        <!-- 서버에서 반환된 방 목록을 여기에 동적으로 추가 -->
+        <div th:each="room : ${rooms}">
+            <div class="col-md-4">
+                <div class="room-card">
+                    <a th:href="@{/api/room/{id}(id=${room.id})}">
+                        <div class="room-card-image">
+                            <img th:src="@{${room.roomImageUri}}" alt="Room Image" class="img-fluid">
+                        </div>
+                        <div class="room-card-body">
+                            <h5 class="room-card-title" th:text="${room.roomName}">방 이름</h5>
+                            <p class="room-card-price" th:text="${room.rentalPrice}">가격</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

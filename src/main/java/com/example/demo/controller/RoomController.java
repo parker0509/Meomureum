@@ -39,12 +39,18 @@ class RoomController {
         this.httpSession = httpSession;
     }
 
-    @Operation(summary = "모든 방 목록 조회", description = "모든 방 목록을 조회합니다.")
+    @Operation
     @GetMapping
-    @ResponseBody
-    public List<Room> getRoomList() {
-        return roomService.getAllRooms();
+    // 이 어노테이션은 JSON 형태로 데이터를 반환하도록 지정
+    public String getHome(Model model) {
+        // 검색어가 있다면 해당하는 방들만 반환
+        // 검색어가 없으면 모든 방을 반환
+        List<Room> AllRooms = roomService.getAllRooms();
+
+        model.addAttribute("rooms",AllRooms);
+        return "room-list";
     }
+
 
     @Operation(summary = "방 세부 정보 조회", description = "특정 방의 세부 정보를 조회합니다.")
     @GetMapping("{id}")
@@ -55,12 +61,28 @@ class RoomController {
         return "room-detail";
     }
 
-    @Operation(summary = "방 검색", description = "주소와 가격 범위에 따라 방을 검색합니다.")
+    @Operation(summary = "방 검색", description = "방 이름, 주소, 가격 범위에 따라 방을 검색합니다.")
     @GetMapping("/search")
-    public List<Room> searchRooms(@RequestParam(required = false) String addressName,
-                                  @RequestParam(required = false) double minPrice,
-                                  @RequestParam(required = false) double maxPrice) {
-        return roomService.searchRooms(addressName, minPrice, maxPrice);
+    public String searchRooms(
+            @RequestParam(name = "roomName", required = false) String roomName,
+            @RequestParam(name = "addressName", required = false) String addressName,
+            @RequestParam(name = "minPrice", required = false) Double minPrice,
+            @RequestParam(name = "maxPrice", required = false) Double maxPrice,
+            Model model) {
+
+        System.out.println("roomName: " + roomName);
+        System.out.println("addressName: " + addressName);
+        System.out.println("MinPrice: " + minPrice);
+        System.out.println("MaxPrice: " + maxPrice);
+
+        List<Room> rooms = roomService.getHomeSearchRooms(roomName, addressName, minPrice, maxPrice);
+
+        System.out.println("rooms = " + rooms);
+
+        model.addAttribute("rooms", rooms);
+
+        return "room-list";
+
     }
 
     @Operation(summary = "방 생성 폼", description = "새로운 방을 생성하기 위한 폼을 보여줍니다.")

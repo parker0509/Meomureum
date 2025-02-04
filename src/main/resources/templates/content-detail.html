@@ -33,21 +33,12 @@
     <div class="comments-section">
         <h2>댓글</h2>
 
-        <!-- 예시 댓글 -->
-        <div class="comment">
-            <p>이 콘텐츠 정말 유익했어요! 감사합니다.</p>
-            <div class="comment-author">- 사용자1</div>
-        </div>
-
-        <div class="comment">
-            <p>좋은 정보 감사합니다. 잘 읽었습니다!</p>
-            <div class="comment-author">- 사용자2</div>
-        </div>
-
         <!-- 댓글 목록 -->
         <div th:each="comment : ${content.comments}">
-          닉네임:  <p th:text="${comment.name}"></p>
-            <p th:text="${comment.description}"></p>
+            <div class="comment">
+                <p th:text="${comment.description}"></p>
+                <div class="comment-author" th:text="'- ' + ${comment.name}"></div>
+            </div>
         </div>
     </div>
 
@@ -67,7 +58,8 @@
     <button class="add-button">
         +
     </button>
-</div>
+
+
 
 </body>
 </html>

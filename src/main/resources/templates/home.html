@@ -29,7 +29,6 @@
             <div class="menu">
                 <!-- 로그인한 경우 -->
                 <span class="username" th:if="${username != null}" th:text="${username} + ' 님'">User</span>
-                <a href="/api/admin">예약 확인</a>
                 <a href="/api/room">방</a>
 
                 <!-- 로그인하지 않은 경우 로그인/회원가입 버튼 표시 -->
@@ -47,10 +46,10 @@
 
         <p></p>
 
-        <div class="search-bar">
-            <input type="text" placeholder="지역, 지하철, 대학교 검색">
-            <button>🔍</button>
-        </div>
+        <form action="/api/room/search" method="get" class="search-bar">
+            <input type="text" name="roomName" placeholder="지역, 지하철, 대학교 검색">
+            <button type="submit">🔍</button>
+        </form>
 
         <!--<div class="search-bar">
     <form action="/search" method="GET">
@@ -96,41 +95,17 @@
             <img src="/images/icon7.png" alt="Icon">
             <p>정보공유/커뮤니티</p>
         </a>
-        <a href="/api/room/discount" class="icon-item">
+<!--        <a href="/api/room/discount" class="icon-item">
             <img src="/images/icon8.png" alt="Icon">
             <p>우리집 자랑하기</p>
-        </a>
+        </a>-->
     </section>
 
     <div class="highlight-banner">
         <span>월세가 걱정될 때</span>
         <button>주저말고 주거급여 🏠</button>
     </div>
-    <!--
-        <section class="cards">
-            <div class="card">
-                <div class="card-content">
-                    <img src="/images/home1.png" alt="Card Image">
-                    <h2>반려동물과 함께 살 수 있는 공간</h2>
-                </div>
-            </div>
-            <div class="card">
-                <img src="/path/to/your/image.jpg" alt="Card Image">
-                <h2>카페가 많은 여유로운 곳</h2>
-            </div>
-            <div class="card">
-                <img src="/path/to/your/image.jpg" alt="Card Image">
-                <h3>외국어 응대 가능한 지역</h3>
-            </div>
-            <div class="card">
-                <img src="/path/to/your/image.jpg" alt="Card Image">
-                <h3>채팅 상담 가능한 지점</h3>
-            </div>
-            <div class="card">
-                <img src="/images/home-instr1.png" alt="Card Image">
-                <h3>보증금 0원</h3>
-            </div>
-        </section>-->
+
 </div>
 
 <p></p>
@@ -181,7 +156,7 @@
     <nav>
         <a href="#">홈</a>
         <a href="/api/room/map">지도</a>
-        <a href="#">피드</a>
+        <a href="/api/contents">커뮤니티</a>
         <a href="#">더보기</a>
     </nav>
 </footer>

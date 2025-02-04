@@ -3,57 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <title>방 상세 페이지</title>
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=57c9b6595a27b8053765e34df51ea853"></script>
+    <script type="text/javascript"
+            src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=57c9b6595a27b8053765e34df51ea853"></script>
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .image-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .details {
+            padding: 20px;
+            text-align: center;
+        }
+        .details h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .details h2 {
+            font-size: 1.4rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .price-info {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            background: #f1f1f1;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .info-item {
+            text-align: center;
+        }
+        .info-item p {
+            margin: 5px 0;
+            font-size: 1rem;
+        }
         #map {
             width: 100%;
-            height: 400px;
+            height: 300px;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
+.reserve-button {
+    background-color: #007bff;
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: block;
+    width: 80%;
+    margin: 0 auto 80px; /* 아래 여백 추가 */
+    text-align: center;
+}
+        .reserve-button:hover {
+            background-color: #0056b3;
+        }
+
+        .reserve-button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* 가격과 방 수 등의 정보 스타일 */
+        .room-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .room-info p {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .room-info p span {
+            font-weight: bold;
+            color: #000000;
+        }
+
+        /* 미디어 쿼리 - 모바일 화면에서 레이아웃 조정 */
+        @media (max-width: 768px) {
+            .room-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+/* Footer Section */
+.footer {
+    padding-top: 5px; /* 푸터 위쪽에 여백 추가 */
+    position: fixed;
+    bottom: 0;
+    width: 54.5%;
+    left: 50%;
+    background: #fff;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    transform: translateX(-50%);
+}
+
+.footer nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #007BFF;
+}
     </style>
 </head>
 <body>
+<div class="container">
+    <div class="image-container">
+        <img th:src="${room.roomImageUri}" alt="Room Image">
+    </div>
+    <div class="details">
+        <h1 th:text="${room.roomName}">방 이름</h1>
+        <h2 th:text="${room.location}">강동역 도보 6분</h2>
+        <p class="price-info" th:text="|주 세 ${#numbers.formatInteger(room.rentalPrice, 3, 'COMMA')} 원|">월세 45~60만원</p>
+    </div>
 
-<img th:src="${room.roomImageUri}" alt="Room Image">
-<h1 th:text="${' 방 이름' + room.roomName}">방 이름</h1>
-<p th:text="${' 방 설명' + room.description}">방 설명</p>
-<p th:text="${room.rentalPrice + '원'}">가격</p>
-<p th:text="${room.roomNumber + ' 방 수'}">방 수</p>
-<p th:text="${room.toilet + ' 화장실 수'}">화장실 수</p>
-<p th:text="${room.living + ' 거실 수'}">거실 수</p>
-<p th:text="${room.kitchen + ' 부엌 수'}">부엌 수</p>
+    <div class="room-info">
+        <p><span>주세/1주:</span> <span th:text="|${#numbers.formatInteger(room.rentalPrice, 3 , 'COMMA')}|+원">가격</span>
+        </p>
+        <p><span>방 수:</span> <span th:text="${room.roomNumber + ' 개'}">방 수</span></p>
+        <p><span>화장실:</span> <span th:text="${room.toilet + ' 개'}">화장실 수</span></p>
+        <p><span>거실:</span> <span th:text="${room.living + ' 개'}">거실 수</span></p>
+        <p><span>부엌:</span> <span th:text="${room.kitchen + ' 개'}">부엌 수</span></p>
+    </div>
 
-<!-- 카카오맵 지도 표시 -->
-<div id="map"></div>
 
-<!-- 예약 버튼 -->
-<button>
-    <a href="/api/consult">예약하기</a>
-</button>
+    <div class="info-grid">
+        <div id="map">
+            <p>위치</p>
+        </div>
+    </div>
+    <a href="/api/consult" class="reserve-button">예약하기</a>
+
+
+    <footer class="footer">
+        <nav>
+            <a href="/">홈</a>
+            <a href="/api/room/map">지도</a>
+            <a href="/api/contents">커뮤니티</a>
+            <a href="#">더보기</a>
+        </nav>
+    </footer>
+
+</div>
 
 <script type="text/javascript">
-    // 페이지 로딩 후 실행되는 스크립트
     window.onload = function() {
-        // 방의 위치 정보 (서버에서 전달된 latitude, longitude 값)
-        var lat = [[${room.address.y}]]; // Thymeleaf를 통해 latitude 값 전달
-        var lng = [[${room.address.x}]]; // Thymeleaf를 통해 longitude 값 전달
-
-        // 카카오맵 지도 초기화
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-            mapOption = {
-                center: new kakao.maps.LatLng(lat, lng), // 방의 위치로 지도 중심 설정
-                level: 3 // 지도 확대 수준
-            };
-
-        var map = new kakao.maps.Map(mapContainer, mapOption); // 카카오맵 객체 생성
-
-        // 마커 추가
-        var markerPosition = new kakao.maps.LatLng(lat, lng); // 마커의 위치
-        var marker = new kakao.maps.Marker({
-            position: markerPosition
-        });
-        marker.setMap(map); // 마커 지도에 표시
+        var lat = [[${room.address.y}]];
+        var lng = [[${room.address.x}]];
+        var mapContainer = document.getElementById('map');
+        var mapOption = {
+            center: new kakao.maps.LatLng(lat, lng),
+            level: 3
+        };
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+        var markerPosition = new kakao.maps.LatLng(lat, lng);
+        var marker = new kakao.maps.Marker({ position: markerPosition });
+        marker.setMap(map);
     };
 </script>
-
 </body>
 </html>

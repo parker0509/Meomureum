@@ -28,6 +28,13 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     // 전체 방을 내림차순으로 정렬해서 가져오기
     List<Room> findAllByOrderByIdDesc();  // 모든 방을 내림차순으로 가져오는 메소드
 
+    // 주소명과 가격 범위에 맞는 방을 찾는 쿼리
+   //두개추가
+    List<Room> findByRoomNameContainingIgnoreCase(String roomName);
+    List<Room> findByAddress_AddressNameContainingIgnoreCaseAndRentalPriceBetween(String addressName, Double minPrice, Double maxPrice);
+    //두개추가
+
+//
     List<Room> findByAddress_AddressNameContainingIgnoreCase(String addressName);
 
     List<Room> findByRentalPriceBetween(double minPrice, double maxPrice);

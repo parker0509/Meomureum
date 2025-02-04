@@ -181,6 +181,21 @@ public class RoomService {
     }
 
 
+    //home 검색창
+    public List<Room> getHomeSearchRooms(String roomName, String addressName, Double minPrice, Double maxPrice) {
+        if (roomName != null && !roomName.isEmpty()) {
+            return roomRepository.findByRoomNameContainingIgnoreCase(roomName); // 방 이름으로 검색
+        } else if (addressName != null && !addressName.isEmpty() && minPrice != null && maxPrice != null) {
+            return roomRepository.findByAddress_AddressNameContainingIgnoreCaseAndRentalPriceBetween(addressName, minPrice, maxPrice); // 주소와 가격 범위로 검색
+        } else if (addressName != null && !addressName.isEmpty()) {
+            return roomRepository.findByAddress_AddressNameContainingIgnoreCase(addressName); // 주소로만 검색
+        } else if (minPrice != null && maxPrice != null) {
+            return roomRepository.findByRentalPriceBetween(minPrice, maxPrice); // 가격 범위로만 검색
+        }
+        return roomRepository.findAll(); // 아무 조건이 없으면 모든 방 조회
+    }
+
+
     public List<Room> searchRooms(String addressName, Double mixPrice, Double maxPrice) {
         if (addressName != null && !addressName.isEmpty()) {
             return roomRepository.findByAddress_AddressNameContainingIgnoreCase(addressName);

@@ -336,4 +336,9 @@ textarea {
             margin: 30px;
         }
 
+hr {
+    border: 0;
+    border-top: 1px solid #ccc; /* 회색 구분선 */
+    margin: 10px 0; /* 구분선 위아래 간격 */
+}
 
