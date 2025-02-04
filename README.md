@@ -136,6 +136,8 @@ cd meomureum
 
 - **맵**
 <img src="https://github.com/user-attachments/assets/5d0ae10d-f5b1-44d1-b59f-d375b5331ae1" width="200" height="100"/>
+- **마커**
+<img src="https://github.com/user-attachments/assets/cfbb87e8-9428-4fdc-b636-4eab372fe1c2" width="200" height="100"/>
 
 
 
