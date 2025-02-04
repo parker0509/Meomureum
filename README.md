@@ -125,9 +125,14 @@ cd meomureum
 ## 📸 스크린샷
 ### 메인 페이지
 
+<홈>
 <img src="https://github.com/user-attachments/assets/616e4e96-6290-4ff4-abcb-691bb7cdb124" width="200" height="100"/>
-<img src="https://github.com/user-attachments/assets/e4cd9e4f-486a-4062-a4d8-1e48e6244df8" width="200" height="100"/>
 <img src="https://github.com/user-attachments/assets/21d8722b-c504-4d2a-a399-40b21a328147" width="200" height="100"/>
+<로그인>
+<img src="https://github.com/user-attachments/assets/21d8722b-c504-4d2a-a399-40b21a328147" width="200" height="100"/>
+<로그인 실패시>
+<img src="https://github.com/user-attachments/assets/74752eb8-7175-4971-a879-6e09b0b8dede" width="200" height="100"/>
+<맵>
 <img src="https://github.com/user-attachments/assets/5d0ae10d-f5b1-44d1-b59f-d375b5331ae1" width="200" height="100"/>
 
 
