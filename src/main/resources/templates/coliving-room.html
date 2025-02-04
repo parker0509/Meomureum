@@ -28,21 +28,20 @@
             <div class="brand">
                 <a href="/"> ← </a>
             </div>
-            <div class="menu">
-                <a href="/api/login"> 🗺️ </a>
-                <a href="/api/login"> 📅 </a>
-            </div>
+            <!--            <div class="menu">
+            추가 예정부분
+                            <a href="/api/login"> 🗺️ </a>
+                            <a href="/api/login"> 📅 </a>
+                        </div>-->
         </nav>
     </header>
 </div>
 <div class="container mt-5">
-    <h3 class="new-rooms-title">  원룸 텔</h3>
+    <h3 class="new-rooms-title"> 원룸 텔</h3>
     <h5 class="new-rooms-subtitle"></h5>
 </div>
 <p></p>
 <p></p>
-
-
 
 
 <div class="container">
@@ -54,7 +53,8 @@
                 </div>
                 <div class="room-card-content">
                     <h5 class="room-card-title" th:text="${room.roomName}">방 이름</h5>
-                    <p class="room-card-price" th:text="|${#numbers.formatInteger(room.rentalPrice, 3 , 'COMMA')}|+원">가격</p>
+                    <p class="room-card-price" th:text="|${#numbers.formatInteger(room.rentalPrice, 3 , 'COMMA')}|+원">
+                        가격</p>
                 </div>
             </a>
         </div>
@@ -65,7 +65,7 @@
 </body>
 <footer class="footer">
     <nav>
-        <a href="#">홈</a>
+        <a href="/">홈</a>
         <a href="/api/room/map">지도</a>
         <a href="#">피드</a>
         <a href="#">더보기</a>
