@@ -1,4 +1,4 @@
-# 🏠 Meomureum (머무름)
+![image](https://github.com/user-attachments/assets/7cfb395e-0f23-4c3d-bbce-71e11775adef)![image](https://github.com/user-attachments/assets/06687b20-6f70-4ff9-94f6-84c57c88efd1)# 🏠 Meomureum (머무름)
 
 ## 프로젝트 개요
 “Meomureum (머무름)”은 재개발 지역이나 잠시 머무를 곳이 필요한 분들, 그리고 여행 중 장기 숙박을 원하지만 (1주 이상) 거주하기 어려운 상황에서 유용한 단기 연속 거주 플랫폼입니다.
@@ -112,39 +112,10 @@ cd meomureum
 
 ## 📂 API 설계
 
-
-| 메서드   | URL                           | 설명                          | 인증 필요 |
-|----------|-------------------------------|-------------------------------|-----------|
-| `GET`    | `/api/consult`                 | 상담 페이지 이동               | ❌        |
-| `GET`    | `/search-address`             | 주소 검색                      | ❌        |
-| `GET`    | `/api/room/new`                | 방 생성 폼                    | ✅        |
-| `POST`   | `/api/room/new`                | 새로운 방 생성                | ✅        |
-| `GET`    | `/api/room`                    | 모든 방 목록 조회             | ❌        |
-| `GET`    | `/api/room/{id}`               | 방 세부 정보 조회             | ❌        |
-| `GET`    | `/api/room/video`              | 비디오 방 보기                 | ❌        |
-| `GET`    | `/api/room/share`              | 공유 방 보기                   | ❌        |
-| `GET`    | `/api/room/search`             | 방 검색                        | ❌        |
-| `GET`    | `/api/room/pet`                | 애완동물 허용 방 보기          | ❌        |
-| `GET`    | `/api/room/oneroom`            | 원룸 보기                      | ❌        |
-| `GET`    | `/api/room/officetel`          | 오피스텔 방 보기               | ❌        |
-| `GET`    | `/api/room/map`                | 방 지도 보기                   | ❌        |
-| `GET`    | `/api/room/guest`              | 게스트룸 보기                  | ❌        |
-| `GET`    | `/api/room/filter`             | 방 유형별 필터링               | ❌        |
-| `GET`    | `/api/room/discount`           | 할인 방 보기                   | ❌        |
-| `GET`    | `/api/room/coliving`           | 코리빙 방 보기                 | ❌        |
-| `GET`    | `/api/room/apt`                | 아파트 방 보기                 | ❌        |
-| `GET`    | `/`                            | 방 목록 조회                   | ❌        |
-| `GET`    | `/api/join`                    | 회원가입 페이지                | ❌        |
-| `POST`   | `/api/join`                    | 회원가입                       | ❌        |
-| `GET`    | `/testOAuth2`                  | OAuth2 로그인 페이지          | ❌        |
-| `GET`    | `/oauth2/login`                | OAuth2 로그인                  | ❌        |
-| `GET`    | `/HomePage`                    | HomePage로 이동                | ❌        |
-| `GET`    | `/api/contents/new`            | 콘텐츠 작성 페이지            | ✅        |
-| `POST`   | `/api/contents/new`            | 콘텐츠 저장                    | ✅        |
-| `GET`    | `/api/contents`                | 모든 콘텐츠 목록 조회         | ❌        |
-| `GET`    | `/api/contents/content-form`   | 콘텐츠 작성 폼 페이지         | ❌        |
-| `GET`    | `/api/login`                   | 로그인 페이지 조회            | ❌        |
-| `POST`   | `/login/oauth2/code`           | OAuth 2.0 로그인 처리          | ❌        |
+![image](https://github.com/user-attachments/assets/a733b357-1969-4ee3-8dcf-dcd6fa414182)
+![image](https://github.com/user-attachments/assets/309fa4c5-3047-48a3-9150-0b370e789557)
+![image](https://github.com/user-attachments/assets/be7378c4-0528-48f0-b540-2314710e1fed)
+![image](https://github.com/user-attachments/assets/e20b64e5-37b6-41cc-8496-a3170257223c)
 
 
 ---
