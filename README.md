@@ -77,8 +77,7 @@ demo
 - **주소 검색 기능**: 사용자가 입력한 주소를 바탕으로 정확한 위치를 지도에서 확인할 수 있습니다.
 - **지도 표시**: 방의 위치를 카카오 맵을 통해 사용자에게 시각적으로 제공합니다.
 
-<img src = "https://github.com/user-attachments/assets/3c330dbb-e656-4167-af1f-2d21ea56095c" width="300" height="200"/>
-
+<img src = "https://github.com/user-attachments/assets/54b48bf8-1e1b-416a-a6cc-de93a2b383cc" width="300" height="200"/>
 <img src="https://github.com/user-attachments/assets/5d0ae10d-f5b1-44d1-b59f-d375b5331ae1" width="200" height="200"/>
 
 
