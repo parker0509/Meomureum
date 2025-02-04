@@ -131,7 +131,7 @@ cd meomureum
 
 - **로그인**
 <img src="https://github.com/user-attachments/assets/21d8722b-c504-4d2a-a399-40b21a328147" width="200" height="100"/>
-- **실패**
+  로그인 실패
 <img src="https://github.com/user-attachments/assets/74752eb8-7175-4971-a879-6e09b0b8dede" width="200" height="100"/>
 
 - **맵**
