@@ -147,7 +147,7 @@ cd meomureum
 ---
 
 ## 📅 기능 추가 Notion 사용
-
+- 계속 필요한 기능 추가/수정 중
 <img src="https://github.com/user-attachments/assets/d16c9315-385a-4dc9-80cb-2cadaa758208" width="400" height="200"/>
 
 ---
