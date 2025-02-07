@@ -50,6 +50,14 @@ class RoomController {
         model.addAttribute("rooms",AllRooms);
         return "room-list";
     }
+    @GetMapping("list")
+    @ResponseBody
+    // 이 어노테이션은 JSON 형태로 데이터를 반환하도록 지정
+    public List<Room> getMapRoomList() {
+        // 검색어가 있다면 해당하는 방들만 반환
+        // 검색어가 없으면 모든 방을 반환
+        return roomService.getAllRooms();
+    }
 
 
     @Operation(summary = "방 세부 정보 조회", description = "특정 방의 세부 정보를 조회합니다.")
