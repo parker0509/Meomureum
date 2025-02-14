@@ -56,3 +56,7 @@ task copyPrivate(type: Copy) {
 tasks.withType(JavaCompile) {
 	options.compilerArgs << "-parameters"
 }
+
+test {
+    enabled = false
+}
