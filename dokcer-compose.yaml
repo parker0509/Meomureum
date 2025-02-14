@@ -1,0 +1,20 @@
+version: "3.7"
+
+networks:
+  btb-network:
+    driver: bridge
+
+services:
+  # 예시: 웹 애플리케이션 서비스 추가
+  contiroom-app:
+    build: .
+    image: gkstnaosi/contiroom:latest
+    restart: always
+    container_name: contiroom-app
+    ports:
+      - "8080:8080"
+    networks:
+      - btb-network
+
+
+
