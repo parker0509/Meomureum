@@ -20,7 +20,7 @@ import java.util.Iterator;
 @Service
 public class KakaoApiService {
 
-    @Value("${kakao.api.key}")
+    @Value("${kakao_api_key}")
     private String restApiKey; // Kakao REST API 키를 application.properties 또는 application.yml에 저장
 
     private static final String KAKAO_API_URL = "https://dapi.kakao.com/v2/local/search/address.json"; // 기본 형식은 JSON

@@ -149,7 +149,7 @@ color: #FFF;
 .footer {
     position: fixed;
     bottom: 0;
-    width: 54.5%;
+    width: 45.5%;
     left: 50%; /* 화면의 50% 위치로 설정 */
     background: #fff;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
@@ -160,8 +160,7 @@ color: #FFF;
 .footer nav {
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
-}
+    padding: 10px 0;}
 
 .footer a {
     text-decoration: none;
@@ -331,3 +330,4 @@ a {
         .hero .dots .dot.active {
             background-color: #FF5722;
         }
+/* Global Styles */

@@ -39,7 +39,7 @@ public class SecurityConfig {
 
     // BCryptPasswordEncoder를 빈으로 등록
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
