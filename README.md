@@ -110,7 +110,7 @@ cd meomureum
 <img src="https://github.com/user-attachments/assets/cfbb87e8-9428-4fdc-b636-4eab372fe1c2" width="200" height="100"/>
 
 ---
-##🌟 담당 업무
+## 🌟 담당 업무
 
 1인 개발: 기획부터 백엔드, 프론트엔드, API 설계, DB 설계, 배포까지 전 과정 담당
 
@@ -122,7 +122,7 @@ OAuth2.0 인증: 카카오, 구글, 네이버 소셜 로그인 구현
 
 API 설계: Swagger를 활용한 API 문서화
 
-##💡 성과
+## 💡 성과
 
 사용자 중심의 직관적인 UI/UX 제공
 
@@ -130,7 +130,7 @@ API 설계: Swagger를 활용한 API 문서화
 
 소셜 로그인과 간편 결제 기능으로 사용자 편의성 극대화
 
-##🔗 프로젝트 링크
+## 🔗 프로젝트 링크
 
 GitHub: https://github.com/parker0509/meomureum
 
