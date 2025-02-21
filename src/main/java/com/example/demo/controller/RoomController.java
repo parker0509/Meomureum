@@ -39,7 +39,7 @@ class RoomController {
         this.httpSession = httpSession;
     }
 
-    @Operation
+    @Operation(summary = "방 모두 보기")
     @GetMapping
     // 이 어노테이션은 JSON 형태로 데이터를 반환하도록 지정
     public String getHome(Model model) {
