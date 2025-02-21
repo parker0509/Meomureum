@@ -67,6 +67,10 @@ public class RoomService {
     public Room createRoomswithAddress(String roomName,
                                        double area,
                                        double rentalPrice,
+                                       int kitchen,
+                                       int living,
+                                       int toilet,
+                                       int roomNumber,
                                        String addressQuery,
                                        String description,
                                        String roomImageUri,
@@ -96,6 +100,10 @@ public class RoomService {
         room.setLocation(roomUse);
         room.setDescription(description);
         room.setRoomImageUri(roomImageUri);
+        room.setRoomNumber(roomNumber);
+        room.setLiving(living);
+        room.setToilet(toilet);
+        room.setKitchen(kitchen);
 
 // 추가 내용
         room.setPetAllowed(petAllowed); // 애완견 동반 여부

@@ -110,10 +110,14 @@ class RoomController {
             @RequestParam(name = "roomName") String roomName,
             @RequestParam(name = "area") double area,
             @RequestParam(name = "rentalPrice") double rentalPrice,
+            @RequestParam(name = "kitchen") int kitchen,
+            @RequestParam(name = "living") int living,
+            @RequestParam(name = "toilet") int toilet,
+            @RequestParam(name = "roomNumber") int roomNumber,
             @RequestParam(name = "addressQuery") String addressQuery,
             @RequestParam(name = "description") String description,
             @RequestParam(name = "roomImageUri") String roomImageUri,
-            @RequestParam(name = "roomUse") String roomUse,
+            @RequestParam(name = "roomUse") String roomUse, // roomUse should be a String type, based on the method signature
             @RequestParam(name = "petAllowed", required = false) boolean petAllowed,
             @RequestParam(name = "smokingAllowed", required = false) boolean smokingAllowed,
             @RequestParam(name = "shortTerm", required = false) boolean shortTerm,
@@ -124,8 +128,8 @@ class RoomController {
             @RequestParam(name = "roomType") String roomType
     ) {
         Room room = roomService.createRoomswithAddress(
-                roomName, area, rentalPrice, addressQuery, description, roomImageUri, roomUse,
-                petAllowed, smokingAllowed, shortTerm, parkingAvailable, femaleOnly, noMaintenanceFee, mealProvided, roomType
+                roomName, area, rentalPrice, kitchen, living, toilet, roomNumber, addressQuery, description, roomImageUri,
+                roomUse, petAllowed, smokingAllowed, shortTerm, parkingAvailable, femaleOnly, noMaintenanceFee, mealProvided, roomType
         );
         return ResponseEntity.ok(room);
     }
