@@ -118,7 +118,7 @@ class RoomController {
             @RequestParam(name = "description") String description,
             @RequestParam(name = "roomImageUri") String roomImageUri,
             @RequestParam(name = "roomUse") String roomUse, // roomUse should be a String type, based on the method signature
-            @RequestParam(name = "petAllowed", required = false) boolean petAllowed,
+            @RequestParam(name = "petAllowed", required = false, defaultValue = "false") boolean petAllowed,
             @RequestParam(name = "smokingAllowed", required = false) boolean smokingAllowed,
             @RequestParam(name = "shortTerm", required = false) boolean shortTerm,
             @RequestParam(name = "parkingAvailable", required = false) boolean parkingAvailable,
