@@ -63,18 +63,11 @@
 <div class="container mt-5">
     <h3 class="new-rooms-title text-center">방 목록</h3>
 
-    <!-- 검색 바 -->
-    <form class="form-inline mb-4">
-        <div class="form-group">
-            <input type="text" id="searchInput" class="form-control" placeholder="지역, 지하철, 대학교 검색">
-        </div>
-    </form>
-
     <!-- 방 목록 -->
     <div class="row">
         <!-- 서버에서 반환된 방 목록을 여기에 동적으로 추가 -->
         <div th:each="room : ${rooms}">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="room-card">
                     <a th:href="@{/api/room/{id}(id=${room.id})}">
                         <div class="room-card-image">
