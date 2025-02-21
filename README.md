@@ -109,8 +109,32 @@ cd meomureum
 - **마커**
 <img src="https://github.com/user-attachments/assets/cfbb87e8-9428-4fdc-b636-4eab372fe1c2" width="200" height="100"/>
 
+---
+🌟 담당 업무
 
+1인 개발: 기획부터 백엔드, 프론트엔드, API 설계, DB 설계, 배포까지 전 과정 담당
 
+OAuth2.0 인증: 카카오, 구글, 네이버 소셜 로그인 구현
+
+카카오 맵 API: 지도와 주소 검색 기능 연동
+
+결제 시스템: 단기 월세 결제를 위한 결제 로직 구현
+
+API 설계: Swagger를 활용한 API 문서화
+
+💡 성과
+
+사용자 중심의 직관적인 UI/UX 제공
+
+단기 연속 거주라는 새로운 숙박 시장을 위한 실용적 플랫폼 구축
+
+소셜 로그인과 간편 결제 기능으로 사용자 편의성 극대화
+
+🔗 프로젝트 링크
+
+GitHub: https://github.com/parker0509/meomureum
+
+Notion: 프로젝트 상세 문서화 (요청 시 제공 가능)
 ---
 
 ## 📅 기능 추가 Notion 사용
@@ -119,7 +143,9 @@ cd meomureum
 
 ---
 
+📧 연락처: coldwatergk@gmail.com📂 GitHub: https://github.com/parker0509
 
+---
 ## 🚀 시스템 아키텍처
 
 ![qw](https://github.com/user-attachments/assets/435a40be-4875-4f07-aadc-c268de83c947)
