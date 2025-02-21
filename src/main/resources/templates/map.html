@@ -234,7 +234,7 @@
 
     // 서버에서 데이터 가져오기
     function fetchRooms() {
-        fetch("http://www.meomureum.com/api/room")
+        fetch("http://www.meomureum.com/api/room/list")
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("서버에서 데이터를 불러오는데 실패했습니다.");

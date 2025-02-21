@@ -51,6 +51,13 @@ class RoomController {
         return "room-list";
     }
 
+    @Operation
+    @ResponseBody
+    @GetMapping("/list")
+        public List<Room> getHome() {
+            return roomService.getAllRooms();
+        }
+
 
     @Operation(summary = "방 세부 정보 조회", description = "특정 방의 세부 정보를 조회합니다.")
     @GetMapping("{id}")
