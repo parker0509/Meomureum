@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>머무름 - 홈</title>
     <link rel="stylesheet" href="/css/home/style.css">
-
-    <title>머무름</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -61,6 +61,7 @@
 
 <div class="container mt-5">
     <h3 class="new-rooms-title text-center">방 목록</h3>
+</div>
 
     <!-- 검색 바 -->
     <form class="form-inline mb-4">
@@ -69,6 +70,8 @@
         </div>
     </form>
 
+<div class="container">
+    <div class="room-container">
     <!-- 방 목록 -->
     <div class="room-card" th:each="room : ${rooms}">
         <a th:href="@{/api/room/{id}(id=${room.id})}">
