@@ -78,9 +78,7 @@ cd meomureum
 - Swagger를 이용하여 문서화 작업을 진행했습니다.
 
 <img src="https://github.com/user-attachments/assets/a733b357-1969-4ee3-8dcf-dcd6fa414182" width="200" height="100"/>
-<img src="https://github.com/user-attachments/assets/309fa4c5-3047-48a3-9150-0b370e789557" width="200" height="100"/>
-<img src="https://github.com/user-attachments/assets/be7378c4-0528-48f0-b540-2314710e1fed" width="200" height="100"/>
-<img src="https://github.com/user-attachments/assets/e20b64e5-37b6-41cc-8496-a3170257223c" width="200" height="100"/>
+
 
 
 
